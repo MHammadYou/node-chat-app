@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 
-interface UsersInterface {
+interface UsersInterface extends mongoose.Document {
   username: string,
   email: string,
   password: string,
