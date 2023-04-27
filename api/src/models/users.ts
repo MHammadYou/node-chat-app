@@ -1,9 +1,7 @@
-import mongoose from "mongoose";
-
-const Schema = mongoose.Schema;
+import { Schema, Document, model } from "mongoose";
 
 
-interface UsersInterface extends mongoose.Document {
+interface UsersInterface extends Document {
   username: string,
   email: string,
   password: string,
@@ -19,6 +17,6 @@ const usersSchema = new Schema<UsersInterface>({
 });
 
 
-const Users = mongoose.model<UsersInterface>('Users', usersSchema);
+const Users = model<UsersInterface>('Users', usersSchema);
 
 export default Users;
