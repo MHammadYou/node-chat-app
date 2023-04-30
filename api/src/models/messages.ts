@@ -8,8 +8,13 @@ interface MessagesInterface extends Document {
 }
 
 
-const Messages = new Schema<MessagesInterface>({
+const messagesSchema = new Schema<MessagesInterface>({
     body: String,
     user: { type: Schema.Types.ObjectId, ref: 'Users'},
     conversation: { type: Schema.Types.ObjectId, ref: 'Conversations' }
 })
+
+
+const Messages = model<MessagesInterface>('Messages', messagesSchema);
+
+export default Messages;
