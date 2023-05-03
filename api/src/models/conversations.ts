@@ -1,4 +1,4 @@
-import { Document, Schema } from "mongoose";
+import { Document, Schema, model } from "mongoose";
 
 
 interface ConversationsInterface extends Document {
@@ -10,4 +10,8 @@ interface ConversationsInterface extends Document {
 const ConversationsSchema = new Schema<ConversationsInterface>({
     messages: { type: Schema.Types.ObjectId, ref: 'Messages'},
     users: { type: Schema.Types.ObjectId, ref: 'Users'}
-})
+});
+
+
+const Conversations = model<ConversationsInterface>('Conversations', ConversationsSchema);
+
