@@ -15,3 +15,4 @@ const ConversationsSchema = new Schema<ConversationsInterface>({
 
 const Conversations = model<ConversationsInterface>('Conversations', ConversationsSchema);
 
+export default Conversations;
