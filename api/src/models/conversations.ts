@@ -7,12 +7,12 @@ interface ConversationsInterface extends Document {
 }
 
 
-const ConversationsSchema = new Schema<ConversationsInterface>({
+const conversationsSchema = new Schema<ConversationsInterface>({
     messages: { type: Schema.Types.ObjectId, ref: 'Messages'},
     users: { type: Schema.Types.ObjectId, ref: 'Users'}
 });
 
 
-const Conversations = model<ConversationsInterface>('Conversations', ConversationsSchema);
+const Conversations = model<ConversationsInterface>('Conversations', conversationsSchema);
 
 export default Conversations;
