@@ -1,11 +1,15 @@
-import { Box } from "@mui/material";
+import { styled, Box, BoxProps } from "@mui/material";
 import { Outlet } from "react-router-dom";
+
+const StyledRoot = styled(Box)<BoxProps>(() => ({
+  height: "100vh",
+}));
 
 const Root: React.FC = () => {
   return (
-    <Box sx={{ height: "100vh" }}>
+    <StyledRoot>
       <Outlet />
-    </Box>
+    </StyledRoot>
   );
 };
 
