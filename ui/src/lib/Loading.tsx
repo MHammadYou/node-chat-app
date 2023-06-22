@@ -1,18 +1,18 @@
-import { Box, CircularProgress } from "@mui/material";
+import { styled, Box, BoxProps, CircularProgress } from "@mui/material";
+
+const StyledLoading = styled(Box)<BoxProps>(() => ({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  height: "100%",
+  width: "100%",
+}));
 
 const Loading: React.FC = () => {
   return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100%",
-        width: "100%",
-      }}
-    >
+    <StyledLoading>
       <CircularProgress />
-    </Box>
+    </StyledLoading>
   );
 };
 
