@@ -1,7 +1,16 @@
-import { Box } from "@mui/material";
+import { Link } from "react-router-dom";
 
-const NavLink: React.FC = () => {
-  return <Box>NavLink</Box>;
+type Props = {
+  to: string;
+  text: string;
+};
+
+const NavLink: React.FC<Props> = ({ to, text }) => {
+  return (
+    <Link to={to} style={{ textDecoration: "none" }}>
+      {text}
+    </Link>
+  );
 };
 
 export default NavLink;
