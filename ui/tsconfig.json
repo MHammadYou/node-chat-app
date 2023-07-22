@@ -5,7 +5,7 @@
     "paths": {
       "components/*": ["./src/components/*", "./src/components"],
       "store/*": ["./src/store/*", "./src/store"],
-      "theme/*": ["./src/theme/*"],
+      "theme/*": ["./src/theme/*", "./src/theme"],
       "pages/*": ["./src/pages/*"],
       "lib/*": ["./src/lib/*"],
       "constants/*": ["./src/constants/*"],
