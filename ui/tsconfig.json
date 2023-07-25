@@ -8,7 +8,7 @@
       "theme/*": ["./src/theme/*", "./src/theme"],
       "pages/*": ["./src/pages/*", "./src/pages"],
       "lib/*": ["./src/lib/*", "./src/lib"],
-      "constants/*": ["./src/constants/*"],
+      "constants/*": ["./src/constants/*", "./src/constants"],
       "src/*": ["./src/*"]
     },
     "useDefineForClassFields": true,
