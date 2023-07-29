@@ -11,6 +11,7 @@ export default defineConfig({
       theme: "/src/theme",
       pages: "src/pages",
       lib: "src/lib",
+      constants: "src/constants",
       src: "/src",
     },
   },
