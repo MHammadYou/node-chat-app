@@ -1,4 +1,4 @@
-import { Link } from "../../lib";
+import { Link } from "lib/";
 
 type Props = {
   to: string;
