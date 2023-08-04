@@ -4,13 +4,15 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
+
 import Root from "./Root";
+import { HomePage } from "./pages";
 
 const App: React.FC = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<Root />}>
-        {/* TODO */}
+        <Route index element={<HomePage />} />
       </Route>
     )
   );
