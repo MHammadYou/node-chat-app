@@ -1,20 +1,20 @@
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 
 type Props = {
   to: string;
   children: React.ReactNode;
 };
 
-const LinkWrapper: React.FC<Props> = ({ to, children }) => {
+const Link: React.FC<Props> = ({ to, children }) => {
   const linkStyles: React.CSSProperties = {
     textDecoration: "none",
   };
 
   return (
-    <Link to={to} style={linkStyles}>
+    <RouterLink to={to} style={linkStyles}>
       {children}
-    </Link>
+    </RouterLink>
   );
 };
 
-export default LinkWrapper;
+export default Link;
