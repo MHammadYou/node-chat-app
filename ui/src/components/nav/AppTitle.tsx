@@ -1,5 +1,5 @@
 import { styled, Typography, TypographyProps } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link } from "lib/";
 
 const StyledAppTitle = styled(Typography)<TypographyProps>(({ theme }) => ({
   color: theme.palette.text.primary,
@@ -8,7 +8,7 @@ const StyledAppTitle = styled(Typography)<TypographyProps>(({ theme }) => ({
 
 const AppTitle: React.FC = () => {
   return (
-    <Link to="/" state={{ TextDecoder: "none" }}>
+    <Link to="/">
       <StyledAppTitle variant="h5">Chat App</StyledAppTitle>
     </Link>
   );
