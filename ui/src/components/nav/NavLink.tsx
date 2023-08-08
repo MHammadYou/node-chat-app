@@ -2,7 +2,7 @@ import { Link } from "lib/";
 
 type Props = {
   to: string;
-  children: React.ReactNode;
+  children: string;
 };
 
 const NavLink: React.FC<Props> = ({ to, children }) => {
