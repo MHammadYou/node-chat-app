@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import { Link } from "lib/";
 
 type Props = {
@@ -6,7 +7,11 @@ type Props = {
 };
 
 const NavLink: React.FC<Props> = ({ to, children }) => {
-  return <Link to={to}>{children}</Link>;
+  return (
+    <Link to={to}>
+      <Typography>{children}</Typography>
+    </Link>
+  );
 };
 
 export default NavLink;
