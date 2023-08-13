@@ -1,5 +1,5 @@
 import { styled, Typography, TypographyProps } from "@mui/material";
-import { Link } from "lib/";
+import { Link } from "lib/index";
 
 const StyledAppTitle = styled(Typography)<TypographyProps>(({ theme }) => ({
   color: theme.palette.text.primary,
