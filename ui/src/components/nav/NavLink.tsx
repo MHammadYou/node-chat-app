@@ -1,5 +1,5 @@
 import { styled, Typography, TypographyProps } from "@mui/material";
-import { Link } from "lib/index";
+import Link from "lib/Link.tsx";
 
 type Props = {
   to: string;
