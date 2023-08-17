@@ -1,14 +1,20 @@
-import { AppBar } from "@mui/material";
+import { styled, AppBar, AppBarProps } from "@mui/material";
 
 import AppTitle from "./AppTitle";
 import NavLinks from "./NavLinks";
 
+const StyledNav = styled(AppBar)<AppBarProps>(() => ({
+  display: "flex",
+  flexDirection: "row",
+  padding: "0.5rem",
+}));
+
 const Nav: React.FC = () => {
   return (
-    <AppBar elevation={1} position="static">
+    <StyledNav elevation={1} position="static">
       <AppTitle />
       <NavLinks />
-    </AppBar>
+    </StyledNav>
   );
 };
 
