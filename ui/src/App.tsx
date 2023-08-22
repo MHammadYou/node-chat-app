@@ -6,13 +6,14 @@ import {
 } from "react-router-dom";
 
 import Root from "./Root";
-import { HomePage } from "./pages";
+import { ChatPage, HomePage } from "./pages";
 
 const App: React.FC = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<Root />}>
         <Route index element={<HomePage />} />
+        <Route path="/chat" element={<ChatPage />} />
       </Route>
     )
   );
