@@ -1,4 +1,4 @@
-import { styled, Box, BoxProps } from "@mui/material";
+import { styled, Box, BoxProps, Container } from "@mui/material";
 import { Outlet } from "react-router-dom";
 
 import Nav from "components/nav";
@@ -11,7 +11,9 @@ const Root: React.FC = () => {
   return (
     <StyledRoot>
       <Nav />
-      <Outlet />
+      <Container>
+        <Outlet />
+      </Container>
     </StyledRoot>
   );
 };
