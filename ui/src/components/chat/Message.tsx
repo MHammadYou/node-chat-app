@@ -1,7 +1,16 @@
-import { Box } from "@mui/material";
+import { Typography } from "@mui/material";
 
-const Message: React.FC = () => {
-  return <Box>Message here</Box>;
+type Props = {
+  text: string;
+  username: string;
+};
+
+const Message: React.FC<Props> = ({ text, username }) => {
+  return (
+    <Typography>
+      {text} by {username}
+    </Typography>
+  );
 };
 
 export default Message;
