@@ -1,7 +1,14 @@
-import { Typography } from "@mui/material";
+import { Box } from "@mui/material";
+
+import Message from "./Message";
 
 const Chat: React.FC = () => {
-  return <Typography>Chats Here</Typography>;
+  return (
+    <Box>
+      <Message text="Hello, World!" username="abc" />
+      <Message text="A sample text" username="xyz" />
+    </Box>
+  );
 };
 
 export default Chat;
