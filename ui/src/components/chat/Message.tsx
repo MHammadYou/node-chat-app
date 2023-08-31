@@ -1,14 +1,14 @@
 import { Typography } from "@mui/material";
 
 type Props = {
-  text: string;
   username: string;
+  children: string;
 };
 
-const Message: React.FC<Props> = ({ text, username }) => {
+const Message: React.FC<Props> = ({ username, children }) => {
   return (
     <Typography>
-      {text} by {username}
+      {children} by {username}
     </Typography>
   );
 };
