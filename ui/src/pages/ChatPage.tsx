@@ -1,9 +1,10 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
+import Chat from "components/chat";
 
 const ChatPage: React.FC = () => {
   return (
     <Box>
-      <Typography>Chat Page</Typography>
+      <Chat />
     </Box>
   );
 };
