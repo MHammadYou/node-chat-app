@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 
-const MessageBox: React.FC = () => {
+const NewMessage: React.FC = () => {
   return (
     <Box>
       <Typography>Type message here</Typography>
@@ -8,4 +8,4 @@ const MessageBox: React.FC = () => {
   );
 };
 
-export default MessageBox;
+export default NewMessage;
