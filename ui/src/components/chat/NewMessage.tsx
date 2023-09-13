@@ -1,9 +1,13 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
+
+import MessageInput from "./MessageInput";
+import SendButton from "./SendButton";
 
 const NewMessage: React.FC = () => {
   return (
     <Box>
-      <Typography>Type message here</Typography>
+      <MessageInput />
+      <SendButton />
     </Box>
   );
 };
