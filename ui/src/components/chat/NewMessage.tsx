@@ -1,14 +1,20 @@
-import { Box } from "@mui/material";
+import { styled, Box, BoxProps } from "@mui/material";
 
 import MessageInput from "./MessageInput";
 import SendButton from "./SendButton";
 
+const StyledNewMessage = styled(Box)<BoxProps>(() => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
 const NewMessage: React.FC = () => {
   return (
-    <Box>
+    <StyledNewMessage>
       <MessageInput />
       <SendButton />
-    </Box>
+    </StyledNewMessage>
   );
 };
 
