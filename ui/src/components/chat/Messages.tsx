@@ -4,7 +4,7 @@ import Message from "./Message";
 
 const Messages: React.FC = () => {
   return (
-    <Box>
+    <Box sx={{ width: "100%" }}>
       <Message username="abc">Hello, World!</Message>
       <Message username="xyz">A sample text</Message>
     </Box>
