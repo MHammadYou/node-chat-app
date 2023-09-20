@@ -1,11 +1,11 @@
-import { Box, TextField } from "@mui/material";
+import { styled, TextField, TextFieldProps } from "@mui/material";
+
+const StyledMessageInput = styled(TextField)<TextFieldProps>(() => ({
+  width: "100%",
+}));
 
 const MessageInput: React.FC = () => {
-  return (
-    <Box>
-      <TextField size="small" />
-    </Box>
-  );
+  return <StyledMessageInput size="small" />;
 };
 
 export default MessageInput;
