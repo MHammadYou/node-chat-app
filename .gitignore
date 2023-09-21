@@ -221,3 +221,5 @@ fabric.properties
 *.njsproj
 *.sln
 *.sw?
+
+*.bat
