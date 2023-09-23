@@ -1,7 +1,7 @@
 import { styled, Box, BoxProps } from "@mui/material";
 
-import Messages from "./Messages";
-import NewMessage from "./NewMessage";
+import Messages from "../messages/Messages";
+import NewMessage from "../messages/NewMessage";
 
 const StyledChat = styled(Box)<BoxProps>(() => ({
   display: "flex",
