@@ -1,18 +1,21 @@
-import { styled, Typography, TypographyProps } from "@mui/material";
+import { styled, Typography, Box, BoxProps } from "@mui/material";
 
 type Props = {
   username: string;
   children: string;
 };
 
-const StyledMessage = styled(Typography)<TypographyProps>(() => ({
+const StyledMessage = styled(Box)<BoxProps>(() => ({
   padding: "0.5rem",
 }));
 
 const Message: React.FC<Props> = ({ username, children }) => {
   return (
     <StyledMessage>
-      {children} by {username}
+      <Typography variant="caption" sx={{ color: "grey" }}>
+        {username}
+      </Typography>
+      <Typography>{children}</Typography>
     </StyledMessage>
   );
 };
