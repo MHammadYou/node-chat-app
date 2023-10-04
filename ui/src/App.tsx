@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 
 import Root from "./Root";
-import { ChatPage, HomePage } from "./pages";
+import { ChatPage, HomePage, LoginPage } from "./pages";
 
 const App: React.FC = () => {
   const router = createBrowserRouter(
@@ -14,6 +14,7 @@ const App: React.FC = () => {
       <Route path="/" element={<Root />}>
         <Route index element={<HomePage />} />
         <Route path="/chat" element={<ChatPage />} />
+        <Route path="/login" element={<LoginPage />} />
       </Route>
     )
   );
