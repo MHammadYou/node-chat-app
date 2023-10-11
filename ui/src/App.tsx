@@ -6,7 +6,13 @@ import {
 } from "react-router-dom";
 
 import Root from "./Root";
-import { ChatPage, HomePage, LoginPage, SignupPage } from "./pages";
+import {
+  ChatPage,
+  HomePage,
+  LoginPage,
+  ProfilePage,
+  SignupPage,
+} from "./pages";
 
 const App: React.FC = () => {
   const router = createBrowserRouter(
@@ -16,6 +22,7 @@ const App: React.FC = () => {
         <Route path="/chat" element={<ChatPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
       </Route>
     )
   );
