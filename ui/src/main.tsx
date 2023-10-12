@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import store from "store/";
 
 import ThemeProvider from "theme/ThemeProvider";
-import App from "./App.tsx";
+import App from "components/app/App";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
