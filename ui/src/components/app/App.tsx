@@ -5,7 +5,7 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 
-import Root from "../../Root";
+import Root from "./Root";
 import {
   ChatPage,
   HomePage,
