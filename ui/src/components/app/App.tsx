@@ -4,6 +4,10 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
+import { Provider } from "react-redux";
+
+import store from "store/";
+import ThemeProvider from "theme/ThemeProvider";
 
 import Root from "./Root";
 import {
@@ -27,7 +31,13 @@ const App: React.FC = () => {
     )
   );
 
-  return <RouterProvider router={router} />;
+  return (
+    <Provider store={store}>
+      <ThemeProvider>
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </Provider>
+  );
 };
 
 export default App;
