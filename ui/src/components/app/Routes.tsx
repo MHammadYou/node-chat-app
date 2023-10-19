@@ -12,18 +12,19 @@ import {
   SignupPage,
   ProfilePage,
 } from "src/pages";
+import ROUTES from "constants/routes.ts";
 
 import Root from "./Root";
 
 const Routes: React.FC = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<Root />}>
+      <Route path={ROUTES.default} element={<Root />}>
         <Route index element={<HomePage />} />
-        <Route path="/chat" element={<ChatPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
+        <Route path={ROUTES.chat} element={<ChatPage />} />
+        <Route path={ROUTES.login} element={<LoginPage />} />
+        <Route path={ROUTES.signup} element={<SignupPage />} />
+        <Route path={ROUTES.profile} element={<ProfilePage />} />
       </Route>
     )
   );
