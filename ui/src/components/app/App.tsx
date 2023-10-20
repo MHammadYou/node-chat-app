@@ -3,13 +3,13 @@ import { Provider } from "react-redux";
 import store from "store/";
 import ThemeProvider from "theme/ThemeProvider";
 
-import Routes from "./Routes";
+import RoutesProvider from "./RoutesProvider";
 
 const App: React.FC = () => {
   return (
     <Provider store={store}>
       <ThemeProvider>
-        <Routes />
+        <RoutesProvider />
       </ThemeProvider>
     </Provider>
   );

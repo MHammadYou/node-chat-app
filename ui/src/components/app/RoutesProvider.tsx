@@ -16,7 +16,7 @@ import ROUTES from "constants/routes.ts";
 
 import Root from "./Root";
 
-const Routes: React.FC = () => {
+const RoutesProvider: React.FC = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path={ROUTES.default} element={<Root />}>
@@ -32,4 +32,4 @@ const Routes: React.FC = () => {
   return <RouterProvider router={router} />;
 };
 
-export default Routes;
+export default RoutesProvider;
