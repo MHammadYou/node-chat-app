@@ -7,7 +7,12 @@ import {
   SignupPage,
 } from "src/pages";
 
-export const routes = [
+type RouteInfo = {
+  path: string;
+  component: React.ReactElement;
+};
+
+export const routes: RouteInfo[] = [
   {
     path: ROUTES.default,
     component: <HomePage />,
