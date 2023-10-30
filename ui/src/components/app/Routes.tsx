@@ -1,7 +1,8 @@
 import ROUTES from "constants/routes.ts";
-import { HomePage, LoginPage, ProfilePage, SignupPage } from "src/pages";
+import { HomePage, LoginPage, SignupPage } from "src/pages";
 
 import Chat from "components/chat/Chat";
+import Profile from "components/profile/Profile";
 
 type RouteInfo = {
   path: string;
@@ -27,6 +28,6 @@ export const routes: RouteInfo[] = [
   },
   {
     path: ROUTES.profile,
-    component: <ProfilePage />,
+    component: <Profile />,
   },
 ];
