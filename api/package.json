@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "tsc & node dist/index.js",
-    "dev": "concurrently \"tsc --watch\" \"nodemon dist/index.js\""
+    "start": "tsc & node dist/api/src",
+    "dev": "concurrently \"tsc --watch\" \"nodemon dist/api/src/\""
   },
   "keywords": [],
   "author": "",
