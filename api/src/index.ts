@@ -1,6 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
 
+import "module-alias/register";
+
 import handleRoutes from "./routes";
 import { PORT, DB_URI } from "./constants/settings";
 
