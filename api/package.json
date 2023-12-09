@@ -25,7 +25,11 @@
     "typescript": "^5.2.2"
   },
   "_moduleAliases": {
-    "@lib": "../lib",
-    "controllers": "dist/api/src/controllers"
+    "constants": "dist/api/src/constants",
+    "controllers": "dist/api/src/controllers",
+    "models": "dist/api/src/models/",
+    "routes": "dist/api/src/routes/",
+    "src": "dist/api/src/",
+    "@lib": "../lib"
   }
 }
