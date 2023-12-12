@@ -16,4 +16,14 @@ const usersSchema = new Schema<UsersInterface>({
 
 const Users = model<UsersInterface>("Users", usersSchema);
 
+export const isExistingEmail = async (email: string): Promise<boolean> => {
+  return (await Users.findOne({ email })) ? true : false;
+};
+
+export const isExsitingUsername = async (
+  username: string
+): Promise<boolean> => {
+  return (await Users.findOne({ username })) ? true : false;
+};
+
 export default Users;
