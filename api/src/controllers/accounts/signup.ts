@@ -4,39 +4,52 @@ import bcrypt from "bcrypt";
 import Users from "models/users";
 import { isExistingEmail, isExsitingUsername } from "models/users";
 
-import { CreateUserPayload } from "./types";
+import { CreateUserPayload, UserCreationResponse } from "./types";
 
 export const createUser = async (
   req: Request<{}, {}, CreateUserPayload>,
-  res: Response
+  res: Response<UserCreationResponse>
 ) => {
   const { username, email, password } = req.body;
-
   const isUsernameUnavailable = await isExsitingUsername(username);
   const isEmailUnavailable = await isExistingEmail(email);
 
-  if (isUsernameUnavailable) {
-    res.send("Username already exists");
-    return;
-  } else if (isEmailUnavailable) {
-    res.send("Email already exists");
-    return;
-  }
-
-  const hashedPassword = await bcrypt.hash(password, 10);
-
-  const user = new Users({
-    username,
-    email,
-    password: hashedPassword,
-  });
-
   try {
-    await user.save();
-    res.send("user created successfully");
-  } catch (error) {
-    res.send(error);
-  }
+    if (isUsernameUnavailable && isEmailUnavailable) {
+      throw new Error("Username and email already exist");
+    } else if (isUsernameUnavailable) {
+      throw new Error("Username already exists");
+    } else if (isEmailUnavailable) {
+      throw new Error("Email already exists");
+    }
 
-  res.json({ username, email, password });
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = new Users({
+      username,
+      email,
+      password: hashedPassword,
+    });
+
+    await user.save();
+
+    const response: UserCreationResponse = {
+      success: true,
+      message: "Account created successfully",
+      user: { username, email },
+    };
+
+    res.status(201).json(response);
+  } catch (error) {
+    const [message, status] =
+      error instanceof Error
+        ? [error.message, 409]
+        : ["Something went wrong", 500];
+
+    const response: UserCreationResponse = {
+      success: false,
+      message,
+    };
+
+    res.status(status).json(response);
+  }
 };
