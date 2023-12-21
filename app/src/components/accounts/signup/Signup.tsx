@@ -18,23 +18,19 @@ const Signup: React.FC = () => {
     },
   });
 
+  const fieldsData = [
+    { label: "Username", name: "username", type: "text" },
+    { label: "Email", name: "email", type: "email" },
+    { label: "Password", name: "password", type: "password" },
+    { label: "Confirm Passwor", name: "confirmPassword", type: "password" },
+  ];
+
   return (
     <Box>
       <form onSubmit={formik.handleSubmit}>
-        <TextField formik={formik} label="Username" name="username" />
-        <TextField formik={formik} label="Email" name="email" type="email" />
-        <TextField
-          formik={formik}
-          label="Password"
-          name="password"
-          type="password"
-        />
-        <TextField
-          formik={formik}
-          label="Confirm Password"
-          name="confirmPassword"
-          type="password"
-        />
+        {fieldsData.map(({ label, name, type }) => (
+          <TextField formik={formik} label={label} name={name} type={type} />
+        ))}
 
         <Button type="submit" variant="contained" color="primary">
           Submit

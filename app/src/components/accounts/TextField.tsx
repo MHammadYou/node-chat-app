@@ -13,8 +13,6 @@ type Props = {
   type?: string;
 };
 
-export type TextFieldType = Props;
-
 const TextField: React.FC<Props> = ({ formik, label, name, type = "text" }) => {
   return (
     <InputField
