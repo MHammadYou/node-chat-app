@@ -1,10 +1,14 @@
 import { Box, Button } from "@mui/material";
 import { useFormik } from "formik";
 
+import { useCreateUserMutation } from "store/api/accounts";
+
 import TextField from "../TextField";
 import { signupValidationSchema } from "./utils";
 
 const Signup: React.FC = () => {
+  const [createUser, result] = useCreateUserMutation();
+
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -13,8 +17,13 @@ const Signup: React.FC = () => {
       confirmPassword: "",
     },
     validationSchema: signupValidationSchema,
-    onSubmit: (values) => {
-      // TODO
+    onSubmit: ({ username, email, password }) => {
+      try {
+        createUser({ username, email, password });
+        formik.resetForm();
+      } catch (error) {
+        console.log(error);
+      }
     },
   });
 
