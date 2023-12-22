@@ -13,7 +13,7 @@ const RoutesProvider: React.FC = () => {
     createRoutesFromElements(
       <Route path="/" element={<Root />}>
         {routes.map(({ path, component }) => (
-          <Route path={path} element={component} />
+          <Route path={path} element={component} key={path} />
         ))}
       </Route>
     )

@@ -29,7 +29,13 @@ const Signup: React.FC = () => {
     <Box>
       <form onSubmit={formik.handleSubmit}>
         {fieldsData.map(({ label, name, type }) => (
-          <TextField formik={formik} label={label} name={name} type={type} />
+          <TextField
+            formik={formik}
+            label={label}
+            name={name}
+            type={type}
+            key={name}
+          />
         ))}
 
         <Button type="submit" variant="contained" color="primary">
