@@ -5,12 +5,16 @@ import cors from "cors";
 import "module-alias/register";
 
 import handleRoutes from "./routes";
-import { PORT, DB_URI } from "./constants/settings";
+import { PORT, DB_URI, ALLOWED_ORIGIN } from "./constants/settings";
 
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: ALLOWED_ORIGIN,
+  })
+);
 
 (async () => {
   try {
