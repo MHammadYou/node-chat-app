@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 
+import { UserCreationResponse } from "@lib/api/accounts/types";
 import Users from "models/users";
 import { isExistingEmail, isExsitingUsername } from "models/users";
 
-import { CreateUserPayload, UserCreationResponse } from "./types";
+import { CreateUserPayload } from "./types";
 
 export const createUser = async (
   req: Request<{}, {}, CreateUserPayload>,
