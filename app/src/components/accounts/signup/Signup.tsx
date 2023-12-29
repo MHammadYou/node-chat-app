@@ -1,11 +1,10 @@
-import { Box, Button } from "@mui/material";
 import { useFormik } from "formik";
 
 import { UserCreationResponse } from "@lib/api/accounts/types";
 import { useCreateUserMutation } from "store/api/accounts";
 
-import TextField from "../TextField";
 import { signupValidationSchema } from "./utils";
+import AccountsForm from "../AccountsForm";
 
 const Signup: React.FC = () => {
   const [createUser] = useCreateUserMutation();
@@ -31,7 +30,7 @@ const Signup: React.FC = () => {
     },
   });
 
-  const fieldsData = [
+  const fields = [
     { label: "Username", name: "username", type: "text" },
     { label: "Email", name: "email", type: "email" },
     { label: "Password", name: "password", type: "password" },
@@ -39,23 +38,7 @@ const Signup: React.FC = () => {
   ];
 
   return (
-    <Box>
-      <form onSubmit={formik.handleSubmit}>
-        {fieldsData.map(({ label, name, type }) => (
-          <TextField
-            formik={formik}
-            label={label}
-            name={name}
-            type={type}
-            key={name}
-          />
-        ))}
-
-        <Button type="submit" variant="contained" color="primary">
-          Signup
-        </Button>
-      </form>
-    </Box>
+    <AccountsForm formik={formik} fields={fields} submitText="Create Account" />
   );
 };
 

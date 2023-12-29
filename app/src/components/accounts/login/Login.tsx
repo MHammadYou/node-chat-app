@@ -1,8 +1,7 @@
-import { Box, Button } from "@mui/material";
 import { useFormik } from "formik";
 
 import { loginValidationSchema } from "./utils";
-import TextField from "../TextField";
+import AccountsForm from "../AccountsForm";
 
 const Login: React.FC = () => {
   const formik = useFormik({
@@ -16,30 +15,12 @@ const Login: React.FC = () => {
     },
   });
 
-  const fieldsData = [
+  const fields = [
     { label: "Email", name: "email", type: "email" },
     { label: "Password", name: "password", type: "password" },
   ];
 
-  return (
-    <Box>
-      <form onSubmit={formik.handleSubmit}>
-        {fieldsData.map(({ label, name, type }) => (
-          <TextField
-            formik={formik}
-            label={label}
-            name={name}
-            type={type}
-            key={name}
-          />
-        ))}
-
-        <Button type="submit" variant="contained" color="primary">
-          Login
-        </Button>
-      </form>
-    </Box>
-  );
+  return <AccountsForm formik={formik} fields={fields} submitText="Login" />;
 };
 
 export default Login;

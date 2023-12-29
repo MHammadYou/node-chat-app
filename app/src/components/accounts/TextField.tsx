@@ -1,13 +1,16 @@
 import InputField from "@mui/material/TextField";
 
+export type FormikType = {
+  values: Record<string, any>;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
+  handleSubmit: (e?: React.FormEvent<HTMLFormElement> | undefined) => void;
+  touched: Record<string, boolean>;
+  errors: Record<string, string | undefined>;
+};
+
 type Props = {
-  formik: {
-    values: Record<string, any>;
-    handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    handleBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
-    touched: Record<string, boolean>;
-    errors: Record<string, string | undefined>;
-  };
+  formik: FormikType;
   label: string;
   name: string;
   type?: string;
