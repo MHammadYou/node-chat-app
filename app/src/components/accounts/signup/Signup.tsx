@@ -52,7 +52,7 @@ const Signup: React.FC = () => {
         ))}
 
         <Button type="submit" variant="contained" color="primary">
-          Submit
+          Signup
         </Button>
       </form>
     </Box>
