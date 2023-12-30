@@ -27,6 +27,10 @@ const TextField: React.FC<Props> = ({ formik, label, name, type = "text" }) => {
       onBlur={formik.handleBlur}
       error={formik.touched[name] && Boolean(formik.errors[name])}
       helperText={formik.touched[name] && formik.errors[name]}
+      size="small"
+      sx={{
+        my: 1,
+      }}
     />
   );
 };

@@ -38,7 +38,12 @@ const Signup: React.FC = () => {
   ];
 
   return (
-    <AccountsForm formik={formik} fields={fields} submitText="Create Account" />
+    <AccountsForm
+      formik={formik}
+      fields={fields}
+      formTitle="Create an account"
+      submitText="Register"
+    />
   );
 };
 

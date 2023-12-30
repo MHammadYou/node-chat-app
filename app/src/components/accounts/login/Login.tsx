@@ -20,7 +20,14 @@ const Login: React.FC = () => {
     { label: "Password", name: "password", type: "password" },
   ];
 
-  return <AccountsForm formik={formik} fields={fields} submitText="Login" />;
+  return (
+    <AccountsForm
+      formik={formik}
+      fields={fields}
+      formTitle="Welcome back!"
+      submitText="Login"
+    />
+  );
 };
 
 export default Login;

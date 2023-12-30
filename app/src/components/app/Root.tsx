@@ -11,7 +11,7 @@ const Root: React.FC = () => {
   return (
     <StyledRoot>
       <Nav />
-      <Container>
+      <Container sx={{ height: "100%" }}>
         <Outlet />
       </Container>
     </StyledRoot>

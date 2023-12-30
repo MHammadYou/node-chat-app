@@ -1,18 +1,52 @@
-import { Box, Button } from "@mui/material";
+import {
+  styled,
+  Box,
+  BoxProps,
+  Button,
+  Typography,
+  TypographyProps,
+} from "@mui/material";
 
 import TextField, { FormikType } from "./TextField";
 import { FormFieldType } from "./types";
+import React from "react";
 
 type Props = {
   formik: FormikType;
   fields: FormFieldType[];
+  formTitle: string;
   submitText: string;
 };
 
-const AccountsForm: React.FC<Props> = ({ formik, fields, submitText }) => {
+const StyledAccountsForm = styled(Box)<BoxProps>(() => ({
+  width: "100%",
+  height: "100%",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+}));
+
+const StyledFormTitle = styled(Typography)<TypographyProps>(() => ({
+  textAlign: "center",
+  marginBottom: "0.5rem",
+}));
+
+const AccountsForm: React.FC<Props> = ({
+  formik,
+  fields,
+  formTitle,
+  submitText,
+}) => {
+  const styles: React.CSSProperties = {
+    display: "flex",
+    flexDirection: "column",
+    width: "320px",
+  };
+
   return (
-    <Box>
-      <form onSubmit={formik.handleSubmit}>
+    <StyledAccountsForm>
+      <form onSubmit={formik.handleSubmit} style={styles}>
+        <StyledFormTitle variant="h5">{formTitle}</StyledFormTitle>
         {fields.map(({ label, name, type }) => (
           <TextField
             formik={formik}
@@ -23,11 +57,16 @@ const AccountsForm: React.FC<Props> = ({ formik, fields, submitText }) => {
           />
         ))}
 
-        <Button type="submit" variant="contained" color="primary">
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          sx={{ mt: 1 }}
+        >
           {submitText}
         </Button>
       </form>
-    </Box>
+    </StyledAccountsForm>
   );
 };
 
