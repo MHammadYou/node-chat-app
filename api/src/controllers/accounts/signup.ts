@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 
-import { UserCreationResponse } from "@lib/api/accounts/types";
+import { UserAuthenticationResponse } from "@lib/api/accounts/types";
 import Users from "models/users";
 import { isExistingEmail, isExsitingUsername } from "models/users";
 
@@ -9,7 +9,7 @@ import { CreateUserPayload } from "./types";
 
 export const createUser = async (
   req: Request<{}, {}, CreateUserPayload>,
-  res: Response<UserCreationResponse>
+  res: Response<UserAuthenticationResponse>
 ) => {
   const { username, email, password } = req.body;
   const isUsernameUnavailable = await isExsitingUsername(username);
@@ -33,7 +33,7 @@ export const createUser = async (
 
     await user.save();
 
-    const response: UserCreationResponse = {
+    const response: UserAuthenticationResponse = {
       success: true,
       message: "Account created successfully",
       user: { username, email },
@@ -46,7 +46,7 @@ export const createUser = async (
         ? [error.message, 409]
         : ["Something went wrong", 500];
 
-    const response: UserCreationResponse = {
+    const response: UserAuthenticationResponse = {
       success: false,
       message,
     };
