@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 
-import { UserCreationResponse } from "@lib/api/accounts/types";
+import { UserAuthenticationResponse } from "@lib/api/accounts/types";
 import { useCreateUserMutation } from "store/api/accounts";
 
 import { signupValidationSchema } from "./utils";
@@ -25,7 +25,9 @@ const Signup: React.FC = () => {
         formik.resetForm();
       } catch (error) {
         // TODO: Update this later
-        console.log(((error as any).data as UserCreationResponse).message);
+        console.log(
+          ((error as any).data as UserAuthenticationResponse).message
+        );
       }
     },
   });

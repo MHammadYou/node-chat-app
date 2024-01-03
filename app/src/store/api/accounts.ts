@@ -1,13 +1,23 @@
 import apiSlice from ".";
 
 import { User } from "@lib/types/entities";
-import { UserCreationResponse } from "@lib/api/accounts/types";
+import {
+  UserAuthenticationResponse,
+  UserLoginPayload,
+} from "@lib/api/accounts/types";
 
 const accountsApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    createUser: builder.mutation<UserCreationResponse, User>({
+    createUser: builder.mutation<UserAuthenticationResponse, User>({
       query: (body) => ({
         url: "/signup",
+        method: "POST",
+        body,
+      }),
+    }),
+    loginUser: builder.mutation<UserAuthenticationResponse, UserLoginPayload>({
+      query: (body) => ({
+        url: "/login",
         method: "POST",
         body,
       }),
@@ -15,4 +25,4 @@ const accountsApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useCreateUserMutation } = accountsApi;
+export const { useCreateUserMutation, useLoginUserMutation } = accountsApi;

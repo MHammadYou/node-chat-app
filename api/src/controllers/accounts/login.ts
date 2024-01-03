@@ -33,7 +33,7 @@ export const loginUser = async (
   } catch (error) {
     const [message, status] =
       error instanceof Error
-        ? [error.message, 409]
+        ? [error.message, 401]
         : ["Something went wrong", 500];
 
     const response: UserAuthenticationResponse = {
