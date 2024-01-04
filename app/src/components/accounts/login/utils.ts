@@ -1,11 +1,8 @@
 import { object, string, ObjectSchema } from "yup";
 
-type LoginValidationType = {
-  email: string;
-  password: string;
-};
+import { UserLoginPayload } from "@lib/api/accounts/types";
 
-export const loginValidationSchema: ObjectSchema<LoginValidationType> = object({
+export const loginValidationSchema: ObjectSchema<UserLoginPayload> = object({
   email: string().email("Invalid email").required("Email is missing"),
   password: string()
     .required("Password is missing")

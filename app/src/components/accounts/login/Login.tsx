@@ -5,6 +5,7 @@ import { useLoginUserMutation } from "store/api/accounts";
 
 import { loginValidationSchema } from "./utils";
 import AccountsForm from "../AccountsForm";
+import useToast from "hooks/useToast";
 
 const Login: React.FC = () => {
   const [loginUser] = useLoginUserMutation();
@@ -18,11 +19,12 @@ const Login: React.FC = () => {
     onSubmit: async (values) => {
       try {
         const result = await loginUser(values).unwrap();
-        console.log(result.message);
+        useToast(result.message, "success");
       } catch (error) {
         // TODO: Update this later
-        console.log(
-          ((error as any).data as UserAuthenticationResponse).message
+        useToast(
+          ((error as any).data as UserAuthenticationResponse).message,
+          "error"
         );
       }
       formik.resetForm();

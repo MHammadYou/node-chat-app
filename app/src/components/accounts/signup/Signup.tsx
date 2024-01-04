@@ -5,6 +5,7 @@ import { useCreateUserMutation } from "store/api/accounts";
 
 import { signupValidationSchema } from "./utils";
 import AccountsForm from "../AccountsForm";
+import useToast from "hooks/useToast";
 
 const Signup: React.FC = () => {
   const [createUser] = useCreateUserMutation();
@@ -20,15 +21,15 @@ const Signup: React.FC = () => {
     onSubmit: async ({ username, email, password }) => {
       try {
         const result = await createUser({ username, email, password }).unwrap();
-        console.log(result.message);
-
-        formik.resetForm();
+        useToast(result.message, "success");
       } catch (error) {
         // TODO: Update this later
-        console.log(
-          ((error as any).data as UserAuthenticationResponse).message
+        useToast(
+          ((error as any).data as UserAuthenticationResponse).message,
+          "error"
         );
       }
+      formik.resetForm();
     },
   });
 

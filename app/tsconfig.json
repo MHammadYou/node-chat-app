@@ -8,6 +8,8 @@
       "theme/*": ["./src/theme/*", "./src/theme"],
       "lib/*": ["./src/lib/*", "./src/lib"],
       "constants/*": ["./src/constants/*", "./src/constants"],
+      "contexts/*": ["./src/contexts/*", "./src/contexts"],
+      "hooks/*": ["./src/hooks/*", "./src/hooks"],
       "src/*": ["./src/*", "./src"],
       "@lib/*": ["../lib/*"]
     },
