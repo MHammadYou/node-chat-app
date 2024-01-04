@@ -1,11 +1,13 @@
 import { useFormik } from "formik";
 
 import { UserAuthenticationResponse } from "@lib/api/accounts/types";
+
 import { useLoginUserMutation } from "store/api/accounts";
+import { getSerializedError } from "store/api";
+import useToast from "hooks/useToast";
 
 import { loginValidationSchema } from "./utils";
 import AccountsForm from "../AccountsForm";
-import useToast from "hooks/useToast";
 
 const Login: React.FC = () => {
   const [loginUser] = useLoginUserMutation();
@@ -21,13 +23,17 @@ const Login: React.FC = () => {
         const result = await loginUser(values).unwrap();
         useToast(result.message, "success");
       } catch (error) {
-        // TODO: Update this later
-        useToast(
-          ((error as any).data as UserAuthenticationResponse).message,
-          "error"
-        );
+        const { status, data } =
+          getSerializedError<UserAuthenticationResponse>(error);
+        if (typeof status === "number") {
+          useToast(data.message, "error");
+        } else {
+          useToast("Something went wrong", "error");
+        }
       }
+
       formik.resetForm();
+      return;
     },
   });
 
