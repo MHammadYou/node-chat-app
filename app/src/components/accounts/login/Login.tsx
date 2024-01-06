@@ -4,7 +4,7 @@ import { UserAuthenticationResponse } from "@lib/api/accounts/types";
 
 import { useLoginUserMutation } from "store/api/accounts";
 import { getSerializedError } from "store/api";
-import useToast from "hooks/useToast";
+import useToast, { ToastType } from "hooks/useToast";
 
 import { loginValidationSchema } from "./utils";
 import AccountsForm from "../AccountsForm";
@@ -21,14 +21,14 @@ const Login: React.FC = () => {
     onSubmit: async (values) => {
       try {
         const result = await loginUser(values).unwrap();
-        useToast(result.message, "success");
+        useToast(result.message, ToastType.SUCCESS);
       } catch (error) {
         const { status, data } =
           getSerializedError<UserAuthenticationResponse>(error);
         if (typeof status === "number") {
-          useToast(data.message, "error");
+          useToast(data.message, ToastType.ERROR);
         } else {
-          useToast("Something went wrong", "error");
+          useToast("Something went wrong", ToastType.ERROR);
         }
       }
 

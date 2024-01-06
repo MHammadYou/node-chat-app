@@ -4,7 +4,7 @@ import { UserAuthenticationResponse } from "@lib/api/accounts/types";
 
 import { useCreateUserMutation } from "store/api/accounts";
 import { getSerializedError } from "store/api";
-import useToast from "hooks/useToast";
+import useToast, { ToastType } from "hooks/useToast";
 
 import { signupValidationSchema } from "./utils";
 import AccountsForm from "../AccountsForm";
@@ -23,15 +23,15 @@ const Signup: React.FC = () => {
     onSubmit: async ({ username, email, password }) => {
       try {
         const result = await createUser({ username, email, password }).unwrap();
-        useToast(result.message, "success");
+        useToast(result.message, ToastType.SUCCESS);
       } catch (error) {
         const { status, data } =
           getSerializedError<UserAuthenticationResponse>(error);
 
         if (typeof status === "number") {
-          useToast(data.message, "error");
+          useToast(data.message, ToastType.ERROR);
         } else {
-          useToast("Something went wrong", "error");
+          useToast("Something went wrong", ToastType.ERROR);
         }
       }
 

@@ -1,6 +1,14 @@
-import { toast, TypeOptions } from "react-toastify";
+import { toast } from "react-toastify";
 
-const useToast = (message: string, type: TypeOptions) => {
+export enum ToastType {
+  SUCCESS = "success",
+  INFO = "info",
+  WARNING = "warning",
+  ERROR = "error",
+  DEFAULT = "default",
+}
+
+const useToast = (message: string, type: ToastType) => {
   return toast(message, {
     type: type,
     position: "bottom-right",
