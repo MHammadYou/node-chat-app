@@ -7,6 +7,7 @@ export type UserAuthenticationResponse = {
 export type UserResponseType = {
   username: string;
   email: string;
+  token: string;
 };
 
 export type UserLoginPayload = {

@@ -36,7 +36,6 @@ export const createUser = async (
     const response: UserAuthenticationResponse = {
       success: true,
       message: "Account created successfully",
-      user: { username, email },
     };
 
     res.status(201).json(response);
