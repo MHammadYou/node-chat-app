@@ -1,13 +1,12 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 
 import {
   UserAuthenticationResponse,
   UserLoginPayload,
 } from "@lib/api/accounts/types";
 import { findUserByEmail } from "models/users";
-import { SECRET_KEY } from "constants/settings";
+import { signToken } from "utils/signToken";
 
 export const loginUser = async (
   req: Request<UserLoginPayload>,
@@ -22,7 +21,7 @@ export const loginUser = async (
 
     const isCorrectPassword = await bcrypt.compare(password, user!.password);
     if (isCorrectPassword) {
-      const token = jwt.sign({ userId: user._id }, SECRET_KEY);
+      const token = signToken(user._id);
 
       const response: UserAuthenticationResponse = {
         success: true,
