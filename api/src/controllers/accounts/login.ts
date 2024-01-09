@@ -26,7 +26,7 @@ export const loginUser = async (
       const response: UserAuthenticationResponse = {
         success: true,
         message: "Login successful",
-        user: { username: user.username, email, token },
+        token,
       };
 
       res.status(200).json(response);
