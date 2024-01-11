@@ -1,4 +1,5 @@
 import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
 
 import { UserAuthenticationResponse } from "@lib/api/accounts/types";
 
@@ -11,6 +12,7 @@ import AccountsForm from "../AccountsForm";
 
 const Signup: React.FC = () => {
   const [createUser] = useCreateUserMutation();
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -24,6 +26,7 @@ const Signup: React.FC = () => {
       try {
         const result = await createUser({ username, email, password }).unwrap();
         useToast(result.message, ToastType.SUCCESS);
+        return navigate("/login");
       } catch (error) {
         const { status, data } =
           getSerializedError<UserAuthenticationResponse>(error);
