@@ -37,6 +37,6 @@
     "routes": "dist/api/src/routes/",
     "utils": "dist/api/src/utils/",
     "src": "dist/api/src/",
-    "@lib": "../lib"
+    "@lib": "dist/lib/"
   }
 }
