@@ -1,6 +1,6 @@
 import ROUTES from "constants/routes.ts";
 
-import Home from "./Home";
+import Home from "components/app/Home";
 import Chat from "components/chat/Chat";
 import Signup from "components/accounts/signup/Signup";
 import Login from "components/accounts/login/Login";
