@@ -13,20 +13,23 @@ type RouteInfo = {
 
 export const routes: RouteInfo[] = [
   {
-    path: ROUTES.default,
-    component: <Home />,
-  },
-  {
-    path: ROUTES.chat,
-    component: <Chat />,
-  },
-  {
     path: ROUTES.signup,
     component: <Signup />,
   },
   {
     path: ROUTES.login,
     component: <Login />,
+  },
+];
+
+export const privateRoutes: RouteInfo[] = [
+  {
+    path: ROUTES.default,
+    component: <Home />,
+  },
+  {
+    path: ROUTES.chat,
+    component: <Chat />,
   },
   {
     path: ROUTES.profile,
