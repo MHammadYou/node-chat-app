@@ -1,4 +1,5 @@
 import { Provider } from "react-redux";
+import { CookiesProvider } from "react-cookie";
 
 import store from "store/";
 import ThemeProvider from "theme/ThemeProvider";
@@ -9,10 +10,12 @@ import RoutesProvider from "./routes";
 const App: React.FC = () => {
   return (
     <Provider store={store}>
-      <ThemeProvider>
-        <ToastProvider />
-        <RoutesProvider />
-      </ThemeProvider>
+      <CookiesProvider defaultSetOptions={{ path: "/" }}>
+        <ThemeProvider>
+          <ToastProvider />
+          <RoutesProvider />
+        </ThemeProvider>
+      </CookiesProvider>
     </Provider>
   );
 };
