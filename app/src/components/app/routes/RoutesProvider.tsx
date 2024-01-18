@@ -8,7 +8,7 @@ import {
 import Root from "./Root";
 import NotFound from "./NotFound";
 import { privateRoutes, routes } from "./Routes";
-import PrivateRoute from "./PrivateRoute";
+import PrivateRoutes from "./PrivateRoutes";
 
 const RoutesProvider: React.FC = () => {
   const router = createBrowserRouter(
@@ -17,13 +17,12 @@ const RoutesProvider: React.FC = () => {
         {routes.map(({ path, component }) => (
           <Route path={path} element={component} key={path} />
         ))}
-        {privateRoutes.map(({ path, component }) => (
-          <Route
-            path={path}
-            element={<PrivateRoute Component={component} />}
-            key={path}
-          />
-        ))}
+
+        <Route element={<PrivateRoutes />}>
+          {privateRoutes.map(({ path, component }) => (
+            <Route path={path} element={component} key={path} />
+          ))}
+        </Route>
         <Route path="*" element={<NotFound />} />
       </Route>
     )

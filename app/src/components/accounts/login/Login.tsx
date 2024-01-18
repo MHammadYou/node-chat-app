@@ -28,7 +28,7 @@ const Login: React.FC = () => {
         const result = await loginUser(values).unwrap();
         useToast(result.message, ToastType.SUCCESS);
         setCookie("token", result.token);
-        return navigate(ROUTES.home);
+        return navigate(ROUTES.default);
       } catch (error) {
         const { status, data } =
           getSerializedError<UserAuthenticationResponse>(error);

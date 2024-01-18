@@ -28,10 +28,6 @@ export const privateRoutes: RouteInfo[] = [
     component: <Home />,
   },
   {
-    path: ROUTES.home,
-    component: <Home />,
-  },
-  {
     path: ROUTES.chat,
     component: <Chat />,
   },
