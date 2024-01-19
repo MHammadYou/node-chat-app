@@ -1,7 +1,8 @@
 enum ROUTES {
   default = "/",
-  login = "/login",
   signup = "/signup",
+  login = "/login",
+  logout = "/logout",
   profile = "/profile",
   chat = "/chat",
 }

@@ -1,10 +1,11 @@
 import ROUTES from "constants/routes.ts";
 
 import Home from "components/app/Home";
-import Chat from "components/chat/Chat";
-import Signup from "components/accounts/signup/Signup";
-import Login from "components/accounts/login/Login";
-import Profile from "components/profile/Profile";
+import Chat from "components/chat";
+import Signup from "components/accounts/signup";
+import Login from "components/accounts/login";
+import Logout from "components/accounts/logout";
+import Profile from "components/profile";
 
 type RouteInfo = {
   path: string;
@@ -26,6 +27,10 @@ export const privateRoutes: RouteInfo[] = [
   {
     path: ROUTES.default,
     component: <Home />,
+  },
+  {
+    path: ROUTES.logout,
+    component: <Logout />,
   },
   {
     path: ROUTES.chat,

@@ -1,5 +1,9 @@
 import { styled, Box, BoxProps } from "@mui/material";
+
+import useAuth from "hooks/useAuth";
+
 import NavLink from "./NavLink";
+import ROUTES from "constants/routes";
 
 const StyledNavLinks = styled(Box)<BoxProps>(() => ({
   flex: 1,
@@ -9,11 +13,20 @@ const StyledNavLinks = styled(Box)<BoxProps>(() => ({
 }));
 
 const NavLinks: React.FC = () => {
+  const isUserAuthenticated = useAuth();
+
   return (
     <StyledNavLinks>
-      {/* TODO: Add proper routes later */}
-      <NavLink to={"signup"}>Signup</NavLink>
-      <NavLink to={"login"}>Login</NavLink>
+      {isUserAuthenticated ? (
+        <>
+          <NavLink to={ROUTES.logout}>Logout</NavLink>
+        </>
+      ) : (
+        <>
+          <NavLink to={ROUTES.signup}>Signup</NavLink>
+          <NavLink to={ROUTES.login}>Login</NavLink>
+        </>
+      )}
     </StyledNavLinks>
   );
 };
