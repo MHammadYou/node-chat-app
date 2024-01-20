@@ -1,8 +1,8 @@
-import { useCookies } from "react-cookie";
+import useCookie from "./useCookie";
 
 const useAuth = () => {
-  const [{ token }] = useCookies(["token"]);
-  return !!token;
+  const { cookie } = useCookie("token");
+  return !!cookie;
 };
 
 export default useAuth;

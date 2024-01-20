@@ -1,14 +1,14 @@
 import { useEffect } from "react";
-import { useCookies } from "react-cookie";
 import { Navigate } from "react-router-dom";
 
 import ROUTES from "constants/routes";
+import useCookie from "hooks/useCookie";
 
 const Logout: React.FC = () => {
-  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+  const { removeCookie } = useCookie("token");
 
   useEffect(() => {
-    removeCookie("token");
+    removeCookie();
   }, []);
 
   return <Navigate to={ROUTES.default} />;

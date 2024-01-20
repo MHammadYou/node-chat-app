@@ -1,5 +1,4 @@
 import { useFormik } from "formik";
-import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 
 import { UserAuthenticationResponse } from "@lib/api/accounts/types";
@@ -7,6 +6,7 @@ import { UserAuthenticationResponse } from "@lib/api/accounts/types";
 import { useLoginUserMutation } from "store/api/accounts";
 import { getSerializedError } from "store/api";
 import useToast, { ToastType } from "hooks/useToast";
+import useCookie from "hooks/useCookie";
 import ROUTES from "constants/routes";
 
 import { loginValidationSchema } from "./utils";
@@ -15,7 +15,7 @@ import AccountsForm from "../AccountsForm";
 const Login: React.FC = () => {
   const [loginUser] = useLoginUserMutation();
   const navigate = useNavigate();
-  const [_, setCookie] = useCookies(["token"]);
+  const { setCookie } = useCookie("token");
 
   const formik = useFormik({
     initialValues: {
@@ -27,7 +27,7 @@ const Login: React.FC = () => {
       try {
         const result = await loginUser(values).unwrap();
         useToast(result.message, ToastType.SUCCESS);
-        setCookie("token", result.token);
+        setCookie(result.token);
         return navigate(ROUTES.default);
       } catch (error) {
         const { status, data } =
