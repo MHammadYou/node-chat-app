@@ -2,8 +2,10 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 
 import { UserAuthenticationResponse } from "@lib/api/accounts/types";
+
 import Users from "models/users";
 import { isExistingEmail, isExsitingUsername } from "models/users";
+import { signToken } from "utils/signToken";
 
 import { CreateUserPayload } from "./types";
 
@@ -32,10 +34,12 @@ export const createUser = async (
     });
 
     await user.save();
+    const token = signToken(user._id);
 
     const response: UserAuthenticationResponse = {
       success: true,
       message: "Account created successfully",
+      token,
     };
 
     res.status(201).json(response);

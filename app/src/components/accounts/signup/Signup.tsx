@@ -7,6 +7,7 @@ import ROUTES from "constants/routes";
 import { useCreateUserMutation } from "store/api/accounts";
 import { getSerializedError } from "store/api";
 import useToast, { ToastType } from "hooks/useToast";
+import useCookie from "hooks/useCookie";
 
 import { signupValidationSchema } from "./utils";
 import AccountsForm from "../AccountsForm";
@@ -14,6 +15,7 @@ import AccountsForm from "../AccountsForm";
 const Signup: React.FC = () => {
   const [createUser] = useCreateUserMutation();
   const navigate = useNavigate();
+  const { setCookie } = useCookie("token");
 
   const formik = useFormik({
     initialValues: {
@@ -27,7 +29,8 @@ const Signup: React.FC = () => {
       try {
         const result = await createUser({ username, email, password }).unwrap();
         useToast(result.message, ToastType.SUCCESS);
-        return navigate(ROUTES.login);
+        setCookie(result.token);
+        return navigate(ROUTES.default);
       } catch (error) {
         const { status, data } =
           getSerializedError<UserAuthenticationResponse>(error);
