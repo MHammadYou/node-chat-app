@@ -12,7 +12,7 @@ type RouteInfo = {
   component: React.ReactElement;
 };
 
-export const routes: RouteInfo[] = [
+export const authRoutes: RouteInfo[] = [
   {
     path: ROUTES.signup,
     component: <Signup />,
