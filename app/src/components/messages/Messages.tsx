@@ -2,11 +2,19 @@ import { Box } from "@mui/material";
 
 import Message from "./Message";
 
-const Messages: React.FC = () => {
+type Props = {
+  messages?: {
+    message: string;
+    username: string;
+  }[];
+};
+
+const Messages: React.FC<Props> = ({ messages }) => {
   return (
     <Box sx={{ width: "100%" }}>
-      <Message username="abc">Hello, World!</Message>
-      <Message username="xyz">A sample text</Message>
+      {messages?.map(({ message, username }) => (
+        <Message username={username} message={message} />
+      ))}
     </Box>
   );
 };
