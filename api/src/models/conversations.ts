@@ -1,18 +1,42 @@
 import { Document, Schema, model } from "mongoose";
 
-interface ConversationsInterface extends Document {
-  messages: Schema.Types.ObjectId;
-  users: Schema.Types.ObjectId;
-}
+import { UsersDocument } from "./users";
 
-const conversationsSchema = new Schema<ConversationsInterface>({
-  messages: { type: Schema.Types.ObjectId, ref: "Messages" },
-  users: { type: Schema.Types.ObjectId, ref: "Users" },
+export type ConversationsDocument = Document & {
+  messages: Schema.Types.ObjectId[];
+  users: Schema.Types.ObjectId[];
+};
+
+const conversationsSchema = new Schema<ConversationsDocument>({
+  messages: [{ type: Schema.Types.ObjectId, ref: "Messages" }],
+  users: [{ type: Schema.Types.ObjectId, ref: "Users" }],
 });
 
-const Conversations = model<ConversationsInterface>(
+const Conversations = model<ConversationsDocument>(
   "Conversations",
   conversationsSchema
 );
+
+export const createConversation = async (
+  users?: UsersDocument[]
+): Promise<ConversationsDocument | string> => {
+  const conversation = new Conversations({
+    ...(users && { users }),
+  });
+
+  try {
+    await conversation.save();
+
+    users?.map(async (user) => {
+      user.conversations.push(conversation._id);
+      await user.save();
+    });
+  } catch (error) {
+    console.log(error);
+    return "Failed to create conversation";
+  }
+
+  return conversation;
+};
 
 export default Conversations;

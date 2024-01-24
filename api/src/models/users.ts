@@ -1,20 +1,20 @@
 import { Schema, Document, model } from "mongoose";
 
-interface UsersInterface extends Document {
+export type UsersDocument = Document & {
   username: string;
   email: string;
   password: string;
-  // TODO: Add later
-  // picture: string
-}
+  conversations: Schema.Types.ObjectId[];
+};
 
-const usersSchema = new Schema<UsersInterface>({
+const usersSchema = new Schema<UsersDocument>({
   username: { type: String, unique: true, required: true },
   email: { type: String, unique: true, required: true },
   password: { type: String, unique: true, required: true },
+  conversations: [{ type: Schema.Types.ObjectId, ref: "Conversations" }],
 });
 
-const Users = model<UsersInterface>("Users", usersSchema);
+const Users = model<UsersDocument>("Users", usersSchema);
 
 export const isExistingEmail = async (email: string): Promise<boolean> => {
   return (await findUserByEmail(email)) ? true : false;
@@ -28,7 +28,7 @@ export const isExsitingUsername = async (
 
 export const findUserByEmail = async (
   email: string
-): Promise<UsersInterface | null> => {
+): Promise<UsersDocument | null> => {
   return await Users.findOne({ email });
 };
 
