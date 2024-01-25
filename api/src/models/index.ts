@@ -1,5 +1,5 @@
-import Conversations from "./conversations";
+import Chats from "./chats";
 import Messages from "./messages";
 import Users from "./users";
 
-export { Conversations, Messages, Users };
+export { Chats, Messages, Users };

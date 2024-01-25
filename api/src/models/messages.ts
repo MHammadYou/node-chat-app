@@ -1,18 +1,18 @@
 import { Schema, Document, model } from "mongoose";
 
 import { UsersDocument } from "./users";
-import { ConversationsDocument } from "./conversations";
+import { ChatsDocument } from "./chats";
 
 export type MessagesDocument = Document & {
   body: string;
   user: Schema.Types.ObjectId;
-  conversation: Schema.Types.ObjectId;
+  chat: Schema.Types.ObjectId;
 };
 
 const messagesSchema = new Schema<MessagesDocument>({
   body: String,
   user: { type: Schema.Types.ObjectId, ref: "Users" },
-  conversation: { type: Schema.Types.ObjectId, ref: "Conversations" },
+  chat: { type: Schema.Types.ObjectId, ref: "Chats" },
 });
 
 const Messages = model<MessagesDocument>("Messages", messagesSchema);
@@ -20,18 +20,18 @@ const Messages = model<MessagesDocument>("Messages", messagesSchema);
 export const createMessage = async (
   body: string,
   user: UsersDocument,
-  conversation: ConversationsDocument
+  chat: ChatsDocument
 ): Promise<MessagesDocument> => {
   const message = new Messages({
     body,
     user,
-    conversation,
+    chat,
   });
 
   try {
     await message.save();
-    conversation.messages.push(message._id);
-    await conversation.save();
+    chat.messages.push(message._id);
+    await chat.save();
   } catch (error) {
     console.log(error);
   }

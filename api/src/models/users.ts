@@ -4,14 +4,14 @@ export type UsersDocument = Document & {
   username: string;
   email: string;
   password: string;
-  conversations: Schema.Types.ObjectId[];
+  chats: Schema.Types.ObjectId[];
 };
 
 const usersSchema = new Schema<UsersDocument>({
   username: { type: String, unique: true, required: true },
   email: { type: String, unique: true, required: true },
   password: { type: String, unique: true, required: true },
-  conversations: [{ type: Schema.Types.ObjectId, ref: "Conversations" }],
+  chats: [{ type: Schema.Types.ObjectId, ref: "Chats" }],
 });
 
 const Users = model<UsersDocument>("Users", usersSchema);
