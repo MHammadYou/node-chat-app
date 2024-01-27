@@ -6,6 +6,7 @@ import "module-alias/register";
 
 import handleRoutes from "./routes";
 import { PORT, DB_URI, ALLOWED_ORIGIN } from "./constants/settings";
+import { registerModels } from "./models";
 
 const app = express();
 
@@ -22,6 +23,8 @@ app.use(
 
     if (res) {
       console.log("Connected to the database");
+
+      await registerModels();
       app.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
     }
   } catch (error) {

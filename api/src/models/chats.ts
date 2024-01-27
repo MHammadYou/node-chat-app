@@ -1,4 +1,5 @@
 import { Document, Schema, model } from "mongoose";
+import { MessagesDocument } from "./messages";
 
 // TODO: Add Users later
 export type ChatsDocument = Document & {
@@ -12,6 +13,15 @@ const chatsSchema = new Schema<ChatsDocument>({
 });
 
 const Chats = model<ChatsDocument>("Chats", chatsSchema);
+
+export const getPopulatedMessages = async (chatId: Schema.Types.ObjectId) => {
+  Chats.findOne({ _id: chatId })
+    .populate<{ messages: MessagesDocument }>("messages")
+    .orFail()
+    .then((doc) => {
+      console.log(doc.messages);
+    });
+};
 
 // TODO: Add populate methods later
 
