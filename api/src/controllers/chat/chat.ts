@@ -1,12 +1,10 @@
 import { Request, Response } from "express";
 
-import Chats from "models/chats";
+import { findChat } from "models/chats";
 
 export const getChat = async (req: Request, res: Response) => {
   try {
-    const chats = await Chats.find();
-    const chat = chats?.[0];
-
+    const chat = await findChat();
     res.status(200).json(chat);
   } catch (error) {
     console.log(error);

@@ -14,16 +14,12 @@ const chatsSchema = new Schema<ChatsDocument>({
 
 const Chats = model<ChatsDocument>("Chats", chatsSchema);
 
-export const getPopulatedMessages = async (chatId: Schema.Types.ObjectId) => {
-  Chats.findOne({ _id: chatId })
+// TODO: Update later, findChat -> findChatById
+export const findChat = async () => {
+  return await Chats.findOne({})
     .populate<{ messages: MessagesDocument }>("messages")
-    .orFail()
-    .then((doc) => {
-      console.log(doc.messages);
-    });
+    .exec();
 };
-
-// TODO: Add populate methods later
 
 // export const createChat = async (
 //   users?: UsersDocument[]
