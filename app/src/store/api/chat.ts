@@ -4,7 +4,7 @@ import { API_ENDPOINTS } from "@lib/constants/api-endpoints.ts";
 
 const chatApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getChat: builder.query({
+    getChat: builder.query<any, void>({
       query: () => ({
         url: API_ENDPOINTS.chat,
       }),

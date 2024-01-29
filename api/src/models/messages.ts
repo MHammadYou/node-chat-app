@@ -1,7 +1,7 @@
 import { Schema, Document, model } from "mongoose";
 
 import { UsersDocument } from "./users";
-import { ChatsDocument } from "./chats";
+import Chats, { ChatsDocument } from "./chats";
 
 export type MessagesDocument = Document & {
   body: string;
@@ -19,19 +19,21 @@ const Messages = model<MessagesDocument>("Messages", messagesSchema);
 
 export const createMessage = async (
   body: string,
-  user: UsersDocument,
-  chat: ChatsDocument
+  userId: UsersDocument,
+  chatId: ChatsDocument
 ): Promise<MessagesDocument> => {
   const message = new Messages({
     body,
-    user,
-    chat,
+    user: userId,
+    chat: chatId,
   });
 
   try {
     await message.save();
-    chat.messages.push(message._id);
-    await chat.save();
+
+    const chat = await Chats.findById(chatId);
+    chat?.messages.push(message._id);
+    await chat?.save();
   } catch (error) {
     console.log(error);
   }

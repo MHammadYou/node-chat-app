@@ -12,8 +12,8 @@ type Props = {
 const Messages: React.FC<Props> = ({ messages }) => {
   return (
     <Box sx={{ width: "100%" }}>
-      {messages?.map(({ message, username }) => (
-        <Message username={username} message={message} />
+      {messages?.map(({ message, username }, index) => (
+        <Message username={username} message={message} key={index} />
       ))}
     </Box>
   );
