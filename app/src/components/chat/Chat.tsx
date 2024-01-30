@@ -18,9 +18,9 @@ const Chat: React.FC = () => {
   if (error) console.log(error);
 
   // TODO: Update later
-  const messages = data.messages?.map(({ body, user }) => ({
+  const messages = data.messages?.map(({ body, username }) => ({
     message: body,
-    username: user,
+    username,
   }));
 
   return (
