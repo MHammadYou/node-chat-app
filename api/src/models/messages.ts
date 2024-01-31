@@ -1,7 +1,15 @@
 import { Schema, Document, model } from "mongoose";
 
+import { User } from "@lib/types/entities";
+
 import { UsersDocument } from "./users";
 import Chats, { ChatsDocument } from "./chats";
+
+export type PopulatedMessage = {
+  _id: string;
+  body: string;
+  user: User;
+};
 
 export type MessagesDocument = Document & {
   body: string;

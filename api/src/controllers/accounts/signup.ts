@@ -2,15 +2,14 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 
 import { UserAuthenticationResponse } from "@lib/api/accounts/types";
+import { User } from "@lib/types/entities";
 
 import Users from "models/users";
 import { isExistingEmail, isExsitingUsername } from "models/users";
 import { signToken } from "utils/signToken";
 
-import { CreateUserPayload } from "./types";
-
 export const createUser = async (
-  req: Request<{}, {}, CreateUserPayload>,
+  req: Request<{}, {}, User>,
   res: Response<UserAuthenticationResponse>
 ) => {
   const { username, email, password } = req.body;

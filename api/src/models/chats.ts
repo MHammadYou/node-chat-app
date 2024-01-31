@@ -1,5 +1,8 @@
 import { Document, Schema, model } from "mongoose";
-import { MessagesDocument } from "./messages";
+
+import { ChatResponse } from "@lib/api/chat/types";
+
+import { PopulatedMessage } from "./messages";
 
 // TODO: Add Users later
 export type ChatsDocument = Document & {
@@ -15,9 +18,9 @@ const chatsSchema = new Schema<ChatsDocument>({
 const Chats = model<ChatsDocument>("Chats", chatsSchema);
 
 // TODO: Update later, findChat -> findChatById
-export const findPopulatedChat = async () => {
+export const findPopulatedChat = async (): Promise<ChatResponse> => {
   const chat = await Chats.findOne({})
-    .populate<{ messages: MessagesDocument[] }>({
+    .populate<{ messages: PopulatedMessage[] }>({
       path: "messages",
       model: "Messages",
       populate: {
@@ -29,14 +32,16 @@ export const findPopulatedChat = async () => {
 
   return {
     id: chat?._id,
-    messages: chat?.messages.map(({ _id, body, user }) => {
-      const username = user.username;
-      return {
-        id: _id,
-        body,
-        username,
-      };
-    }),
+    messages: chat?.messages.length
+      ? chat?.messages?.map(({ _id, body, user }) => {
+          const username = user.username;
+          return {
+            id: _id,
+            body,
+            username,
+          };
+        })
+      : [],
   };
 };
 
