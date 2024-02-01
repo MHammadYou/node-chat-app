@@ -1,6 +1,4 @@
 export type UserAuthenticationResponse = {
-  success: boolean;
-  message: string;
   token?: string;
 };
 

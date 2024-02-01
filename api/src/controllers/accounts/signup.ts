@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 
 import { UserAuthenticationResponse } from "@lib/api/accounts/types";
 import { User } from "@lib/types/entities";
+import { ApiError } from "@lib/api/types";
 
 import Users from "models/users";
 import { isExistingEmail, isExsitingUsername } from "models/users";
@@ -10,7 +11,7 @@ import { signToken } from "utils/signToken";
 
 export const createUser = async (
   req: Request<{}, {}, User>,
-  res: Response<UserAuthenticationResponse>
+  res: Response<UserAuthenticationResponse | ApiError>
 ) => {
   const { username, email, password } = req.body;
   const isUsernameUnavailable = await isExsitingUsername(username);
@@ -33,23 +34,17 @@ export const createUser = async (
     });
 
     await user.save();
+
     const token = signToken(user._id);
-
-    const response: UserAuthenticationResponse = {
-      success: true,
-      message: "Account created successfully",
-      token,
-    };
-
-    res.status(201).json(response);
+    res.status(201).json({ token });
   } catch (error) {
     const [message, status] =
       error instanceof Error
         ? [error.message, 409]
         : ["Something went wrong", 500];
 
-    const response: UserAuthenticationResponse = {
-      success: false,
+    const response: ApiError = {
+      status,
       message,
     };
 

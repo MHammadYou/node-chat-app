@@ -18,7 +18,7 @@ const chatsSchema = new Schema<ChatsDocument>({
 const Chats = model<ChatsDocument>("Chats", chatsSchema);
 
 // TODO: Update later, findChat -> findChatById
-export const findPopulatedChat = async (): Promise<ChatResponse> => {
+export const findPopulatedChat = async (): Promise<ChatResponse | null> => {
   const chat = await Chats.findOne({})
     .populate<{ messages: PopulatedMessage[] }>({
       path: "messages",
@@ -30,19 +30,22 @@ export const findPopulatedChat = async (): Promise<ChatResponse> => {
     })
     .exec();
 
-  return {
-    id: chat?._id,
-    messages: chat?.messages.length
-      ? chat?.messages?.map(({ _id, text, user }) => {
-          const username = user.username;
-          return {
-            id: _id,
-            text,
-            username,
-          };
-        })
-      : [],
-  };
+  if (chat) {
+    return {
+      id: chat._id,
+      messages: chat.messages.length
+        ? chat.messages?.map(({ _id, text, user }) => {
+            const username = user.username;
+            return {
+              id: _id,
+              text,
+              username,
+            };
+          })
+        : [],
+    };
+  }
+  return null;
 };
 
 // export const createChat = async (

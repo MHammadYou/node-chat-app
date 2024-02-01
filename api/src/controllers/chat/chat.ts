@@ -11,12 +11,19 @@ export const getChat = async (
 ) => {
   try {
     const chat = await findPopulatedChat();
+
+    if (!chat) throw new Error("Can't find chat");
+
     res.status(200).json(chat);
   } catch (error) {
-    console.log(error);
+    const [message, status] =
+      error instanceof Error
+        ? [error.message, 404]
+        : ["Something went wrong", 500];
+
     res.status(404).json({
-      status: 404,
-      message: "Failed to fetch chat",
+      status,
+      message,
     });
   }
 };

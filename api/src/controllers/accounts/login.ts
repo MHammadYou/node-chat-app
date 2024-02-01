@@ -5,12 +5,14 @@ import {
   UserAuthenticationResponse,
   UserLoginPayload,
 } from "@lib/api/accounts/types";
+import { ApiError } from "@lib/api/types";
+
 import { findUserByEmail } from "models/users";
 import { signToken } from "utils/signToken";
 
 export const loginUser = async (
   req: Request<UserLoginPayload>,
-  res: Response<UserAuthenticationResponse>
+  res: Response<UserAuthenticationResponse | ApiError>
 ) => {
   const { email, password } = req.body;
 
@@ -22,14 +24,7 @@ export const loginUser = async (
     const isCorrectPassword = await bcrypt.compare(password, user!.password);
     if (isCorrectPassword) {
       const token = signToken(user._id);
-
-      const response: UserAuthenticationResponse = {
-        success: true,
-        message: "Login successful",
-        token,
-      };
-
-      res.status(200).json(response);
+      res.status(200).json({ token });
     } else {
       throw new Error("Email or password didn't match");
     }
@@ -39,8 +34,8 @@ export const loginUser = async (
         ? [error.message, 401]
         : ["Something went wrong", 500];
 
-    const response: UserAuthenticationResponse = {
-      success: false,
+    const response: ApiError = {
+      status,
       message,
     };
 

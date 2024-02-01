@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 
-import { UserAuthenticationResponse } from "@lib/api/accounts/types";
+import { ApiError } from "@lib/api/types";
 
 import { useLoginUserMutation } from "store/api/accounts";
 import { getSerializedError } from "store/api";
@@ -26,12 +26,11 @@ const Login: React.FC = () => {
     onSubmit: async (values) => {
       try {
         const result = await loginUser(values).unwrap();
-        useToast(result.message, ToastType.SUCCESS);
+        useToast("Login Successful", ToastType.SUCCESS);
         setCookie(result.token);
         return navigate(ROUTES.default);
       } catch (error) {
-        const { status, data } =
-          getSerializedError<UserAuthenticationResponse>(error);
+        const { status, data } = getSerializedError<ApiError>(error);
         if (typeof status === "number") {
           useToast(data.message, ToastType.ERROR);
         } else {
