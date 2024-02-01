@@ -1,19 +1,18 @@
 import { Box } from "@mui/material";
 
+import { Message as MessageType } from "@lib/api/chat/types";
+
 import Message from "./Message";
 
 type Props = {
-  messages?: {
-    message: string;
-    username: string;
-  }[];
+  messages?: MessageType[];
 };
 
 const Messages: React.FC<Props> = ({ messages }) => {
   return (
     <Box sx={{ width: "100%" }}>
-      {messages?.map(({ message, username }, index) => (
-        <Message username={username} message={message} key={index} />
+      {messages?.map(({ id, text, username }) => (
+        <Message username={username} text={text} key={id} />
       ))}
     </Box>
   );

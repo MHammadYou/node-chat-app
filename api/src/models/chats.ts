@@ -33,11 +33,11 @@ export const findPopulatedChat = async (): Promise<ChatResponse> => {
   return {
     id: chat?._id,
     messages: chat?.messages.length
-      ? chat?.messages?.map(({ _id, body, user }) => {
+      ? chat?.messages?.map(({ _id, text, user }) => {
           const username = user.username;
           return {
             id: _id,
-            body,
+            text,
             username,
           };
         })

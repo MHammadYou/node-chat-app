@@ -6,6 +6,6 @@ export type ChatResponse = {
 
 export type Message = {
   id: string;
-  body: string;
+  text: string;
   username: string;
 };

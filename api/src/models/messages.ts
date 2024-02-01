@@ -7,18 +7,18 @@ import Chats, { ChatsDocument } from "./chats";
 
 export type PopulatedMessage = {
   _id: string;
-  body: string;
+  text: string;
   user: User;
 };
 
 export type MessagesDocument = Document & {
-  body: string;
+  text: string;
   user: Schema.Types.ObjectId;
   chat: Schema.Types.ObjectId;
 };
 
 const messagesSchema = new Schema<MessagesDocument>({
-  body: String,
+  text: String,
   user: { type: Schema.Types.ObjectId, ref: "Users" },
   chat: { type: Schema.Types.ObjectId, ref: "Chats" },
 });
@@ -26,12 +26,12 @@ const messagesSchema = new Schema<MessagesDocument>({
 const Messages = model<MessagesDocument>("Messages", messagesSchema);
 
 export const createMessage = async (
-  body: string,
+  text: string,
   userId: UsersDocument,
   chatId: ChatsDocument
 ): Promise<MessagesDocument> => {
   const message = new Messages({
-    body,
+    text,
     user: userId,
     chat: chatId,
   });

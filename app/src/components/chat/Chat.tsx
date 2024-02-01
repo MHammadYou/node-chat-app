@@ -1,8 +1,9 @@
 import { styled, Box, BoxProps } from "@mui/material";
 
-import { Messages, NewMessage } from "../messages";
 import { useGetChatQuery } from "store/api/chat";
 import Loading from "lib/Loading";
+
+import { Messages, NewMessage } from "../messages";
 
 const StyledChat = styled(Box)<BoxProps>(() => ({
   display: "flex",
@@ -17,15 +18,9 @@ const Chat: React.FC = () => {
   if (isLoading) return <Loading />;
   if (error) console.log(error);
 
-  // TODO: Update later
-  const messages = data.messages?.map(({ body, username }) => ({
-    message: body,
-    username,
-  }));
-
   return (
     <StyledChat>
-      <Messages messages={messages} />
+      <Messages messages={data?.messages} />
       <NewMessage />
     </StyledChat>
   );
