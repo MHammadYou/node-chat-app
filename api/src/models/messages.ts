@@ -27,9 +27,9 @@ const Messages = model<MessagesDocument>("Messages", messagesSchema);
 
 export const createMessage = async (
   text: string,
-  userId: UsersDocument,
-  chatId: ChatsDocument
-): Promise<MessagesDocument> => {
+  userId: Schema.Types.ObjectId | string,
+  chatId: Schema.Types.ObjectId | string
+): Promise<MessagesDocument | Error> => {
   const message = new Messages({
     text,
     user: userId,
@@ -40,10 +40,12 @@ export const createMessage = async (
     await message.save();
 
     const chat = await Chats.findById(chatId);
-    chat?.messages.push(message._id);
+    if (!chat) return new Error("Invalid chat");
+
+    chat.messages.push(message._id);
     await chat?.save();
   } catch (error) {
-    console.log(error);
+    return new Error("Failed to create message");
   }
 
   return message;

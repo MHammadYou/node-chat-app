@@ -11,7 +11,7 @@ import { findUserByEmail } from "models/users";
 import { signToken } from "utils/signToken";
 
 export const loginUser = async (
-  req: Request<UserLoginPayload>,
+  req: Request<{}, {}, UserLoginPayload>,
   res: Response<UserAuthenticationResponse | ApiError>
 ) => {
   const { email, password } = req.body;

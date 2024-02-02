@@ -9,3 +9,9 @@ export type Message = {
   text: string;
   username: string;
 };
+
+export type CreateMessagePayload = {
+  text: string;
+  token: string;
+  chatId: string;
+};
