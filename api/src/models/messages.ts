@@ -2,8 +2,8 @@ import { Schema, Document, model } from "mongoose";
 
 import { User } from "@lib/types/entities";
 
-import { UsersDocument } from "./users";
-import Chats, { ChatsDocument } from "./chats";
+import { isExistingUserId } from "./users";
+import Chats from "./chats";
 
 export type PopulatedMessage = {
   _id: string;
@@ -30,6 +30,9 @@ export const createMessage = async (
   userId: Schema.Types.ObjectId | string,
   chatId: Schema.Types.ObjectId | string
 ): Promise<MessagesDocument | Error> => {
+  const isValidUser = await isExistingUserId(userId);
+  if (!isValidUser) return new Error("Invalid user");
+
   const message = new Messages({
     text,
     user: userId,

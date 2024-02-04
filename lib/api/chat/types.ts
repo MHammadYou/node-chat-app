@@ -12,6 +12,5 @@ export type Message = {
 
 export type CreateMessagePayload = {
   text: string;
-  token: string;
   chatId: string;
 };

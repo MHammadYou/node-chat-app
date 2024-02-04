@@ -16,6 +16,12 @@ const usersSchema = new Schema<UsersDocument>({
 
 const Users = model<UsersDocument>("Users", usersSchema);
 
+export const isExistingUserId = async (
+  id: string | Schema.Types.ObjectId
+): Promise<boolean> => {
+  return !!(await Users.findById(id));
+};
+
 export const isExistingEmail = async (email: string): Promise<boolean> => {
   return (await findUserByEmail(email)) ? true : false;
 };

@@ -36,6 +36,7 @@
     "models": "dist/api/src/models/",
     "routes": "dist/api/src/routes/",
     "utils": "dist/api/src/utils/",
+    "middlewares": "dist/api/src/middlewares/",
     "src": "dist/api/src/",
     "@lib": "dist/lib/"
   }
