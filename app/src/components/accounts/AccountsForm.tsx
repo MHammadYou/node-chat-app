@@ -7,7 +7,7 @@ import {
   TypographyProps,
 } from "@mui/material";
 
-import TextField, { FormikType } from "./TextField";
+import TextField, { FormikType } from "lib/TextField";
 import { FormFieldType } from "./types";
 import React from "react";
 

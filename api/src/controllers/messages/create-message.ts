@@ -15,7 +15,7 @@ export const createMessage = async (
     if (message instanceof Error) {
       throw message;
     }
-    res.sendStatus(201);
+    res.status(201).json({});
   } catch (error) {
     const [message, status] =
       error instanceof Error
