@@ -3,7 +3,7 @@ import { styled, Box, BoxProps } from "@mui/material";
 import { useGetChatQuery } from "store/api/chat";
 import Loading from "lib/Loading";
 
-import { Messages, NewMessage } from "../messages";
+import { Messages, NewMessage } from "./messages";
 
 const StyledChat = styled(Box)<BoxProps>(() => ({
   display: "flex",

@@ -14,3 +14,5 @@ const chatApi = apiSlice.injectEndpoints({
 });
 
 export const { useGetChatQuery } = chatApi;
+
+export default chatApi;
