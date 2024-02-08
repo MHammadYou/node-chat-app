@@ -36,7 +36,6 @@ const NewMessage: React.FC = () => {
         useToast("Message created", ToastType.SUCCESS);
       } catch (error) {
         const { status, data } = getSerializedError<ApiError>(error);
-        console.log(error);
         if (typeof status === "number") {
           useToast(data.message, ToastType.ERROR);
         } else {
