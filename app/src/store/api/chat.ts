@@ -1,7 +1,9 @@
 import apiSlice from ".";
 
 import { API_ENDPOINTS } from "@lib/constants/api-endpoints.ts";
-import { ChatResponse } from "@lib/api/chat/types.ts";
+import { ChatResponse, Message } from "@lib/api/chat/types.ts";
+
+import { getSocket } from "utils/socket";
 
 const chatApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -9,6 +11,26 @@ const chatApi = apiSlice.injectEndpoints({
       query: () => ({
         url: API_ENDPOINTS.chat,
       }),
+      async onCacheEntryAdded(
+        _arg,
+        { cacheDataLoaded, cacheEntryRemoved, updateCachedData }
+      ) {
+        try {
+          await cacheDataLoaded;
+
+          const socket = getSocket();
+
+          socket.on("chat", (message: Message) => {
+            updateCachedData((draft) => {
+              draft.messages.push(message);
+            });
+          });
+
+          await cacheEntryRemoved;
+        } catch (error) {
+          console.log(error);
+        }
+      },
     }),
   }),
 });

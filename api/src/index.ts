@@ -35,6 +35,14 @@ app.use(
       io.on("connection", async (socket) => {
         console.log("User connected");
 
+        socket.on("create-message", (messagePayload, callback) => {
+          console.log("create-message now");
+
+          // TODO: Emit a "chat" response
+
+          callback({ status: 200, message: "Message Created successfully" });
+        });
+
         await socketRoutes(io, socket);
 
         socket.on("disconnect", () => {

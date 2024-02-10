@@ -1,16 +1,26 @@
 import apiSlice from ".";
 
-import { API_ENDPOINTS } from "@lib/constants/api-endpoints.ts";
+import { CHAT_EVENTS } from "@lib/constants/chat-events.ts";
 import { CreateMessagePayload } from "@lib/api/chat/types.ts";
+
+import { getSocket } from "utils/socket";
 
 const messagesApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createMessage: builder.mutation<void, CreateMessagePayload>({
-      query: (body) => ({
-        url: API_ENDPOINTS.createMessage,
-        method: "POST",
-        body,
-      }),
+      queryFn: async (messagePayload: CreateMessagePayload) => {
+        const socket = getSocket();
+        return new Promise((resolve) => {
+          socket.emit(
+            CHAT_EVENTS.createMessage,
+            messagePayload,
+            // TODO: Update response type
+            (data: any) => {
+              return resolve({ data });
+            }
+          );
+        });
+      },
     }),
   }),
 });

@@ -13,6 +13,7 @@ export default defineConfig({
       constants: "/src/constants",
       contexts: "/src/contexts",
       hooks: "/src/hooks",
+      utils: "/src/utils",
       src: "/src",
       "@lib": "/../lib",
     },

@@ -10,6 +10,7 @@
       "constants/*": ["./src/constants/*", "./src/constants"],
       "contexts/*": ["./src/contexts/*", "./src/contexts"],
       "hooks/*": ["./src/hooks/*", "./src/hooks"],
+      "utils/*": ["./src/utils/*", "./src/utils"],
       "src/*": ["./src/*", "./src"],
       "@lib/*": ["../lib/*"]
     },

@@ -20,7 +20,7 @@ const StyledNewMessage = styled(Box)<BoxProps>(() => ({
 }));
 
 const NewMessage: React.FC = () => {
-  const [createMessage] = useCreateMessageMutation();
+  const [createMessage, { isLoading }] = useCreateMessageMutation();
   const chat = useAppSelector(selectChat);
 
   const formik = useFormik({
@@ -35,12 +35,9 @@ const NewMessage: React.FC = () => {
         }).unwrap();
         useToast("Message created", ToastType.SUCCESS);
       } catch (error) {
-        const { status, data } = getSerializedError<ApiError>(error);
-        if (typeof status === "number") {
-          useToast(data.message, ToastType.ERROR);
-        } else {
-          useToast("Something went wrong", ToastType.ERROR);
-        }
+        // TODO: Handle errors
+        console.log(error);
+        useToast("Something went wrong", ToastType.ERROR);
       }
 
       formik.resetForm();
@@ -52,7 +49,7 @@ const NewMessage: React.FC = () => {
     <form onSubmit={formik.handleSubmit}>
       <StyledNewMessage>
         <TextField formik={formik} label="Type new message" name="message" />
-        <IconButton type="submit">
+        <IconButton type="submit" disabled={isLoading}>
           <SendIcon />
         </IconButton>
       </StyledNewMessage>
