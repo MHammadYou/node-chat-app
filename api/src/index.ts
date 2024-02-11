@@ -1,11 +1,12 @@
 import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
+import { verify, JwtPayload } from "jsonwebtoken";
 import mongoose from "mongoose";
 import cors from "cors";
 import "module-alias/register";
 
-import { PORT, DB_URI, ALLOWED_ORIGIN } from "constants/settings";
+import { PORT, DB_URI, ALLOWED_ORIGIN, SECRET_KEY } from "constants/settings";
 import socketRoutes from "routes/socket-routes";
 
 import handleRoutes from "./routes";
@@ -13,7 +14,7 @@ import { registerModels } from "./models";
 
 const app = express();
 const server = createServer(app);
-export const io = new Server(server);
+const io = new Server(server);
 
 app.use(express.json());
 app.use(
@@ -21,6 +22,20 @@ app.use(
     origin: ALLOWED_ORIGIN,
   })
 );
+
+io.use((socket, next) => {
+  const token = socket.handshake.auth.token;
+  try {
+    if (!token) throw new Error("Authentication token missing");
+    const decoded = verify(token, SECRET_KEY);
+    const userId = (decoded as JwtPayload).id;
+    if (!userId) throw new Error("Invalid authentication token");
+
+    next();
+  } catch (error: any) {
+    next(error);
+  }
+});
 
 (async () => {
   try {
@@ -34,14 +49,6 @@ app.use(
 
       io.on("connection", async (socket) => {
         console.log("User connected");
-
-        socket.on("create-message", (messagePayload, callback) => {
-          console.log("create-message now");
-
-          // TODO: Emit a "chat" response
-
-          callback({ status: 200, message: "Message Created successfully" });
-        });
 
         await socketRoutes(io, socket);
 
