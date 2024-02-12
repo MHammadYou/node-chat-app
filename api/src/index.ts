@@ -1,12 +1,12 @@
 import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
-import { verify, JwtPayload } from "jsonwebtoken";
 import mongoose from "mongoose";
 import cors from "cors";
 import "module-alias/register";
 
-import { PORT, DB_URI, ALLOWED_ORIGIN, SECRET_KEY } from "constants/settings";
+import { PORT, DB_URI, ALLOWED_ORIGIN } from "constants/settings";
+import { socketsAuth } from "middlewares/sockets-auth";
 import socketRoutes from "routes/socket-routes";
 
 import handleRoutes from "./routes";
@@ -23,19 +23,7 @@ app.use(
   })
 );
 
-io.use((socket, next) => {
-  const token = socket.handshake.auth.token;
-  try {
-    if (!token) throw new Error("Authentication token missing");
-    const decoded = verify(token, SECRET_KEY);
-    const userId = (decoded as JwtPayload).id;
-    if (!userId) throw new Error("Invalid authentication token");
-
-    next();
-  } catch (error: any) {
-    next(error);
-  }
-});
+io.use(socketsAuth);
 
 (async () => {
   try {
