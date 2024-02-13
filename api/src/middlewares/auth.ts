@@ -1,8 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import { verify, JwtPayload } from "jsonwebtoken";
-
-import { SECRET_KEY } from "constants/settings";
 import { Schema } from "mongoose";
+
+import { verifyToken } from "utils/verifyToken";
 
 declare global {
   namespace Express {
@@ -22,16 +21,12 @@ export const auth = async (
   next: NextFunction
 ) => {
   const token = req.header("Authorization")?.replace("Bearer ", "");
-
   try {
-    if (!token) throw new Error();
-
-    const decoded = verify(token, SECRET_KEY);
-    res.locals.userId = (decoded as JwtPayload).id;
-    req.userId = (decoded as JwtPayload).id;
-
+    const userId = await verifyToken(token);
+    res.locals.userId = userId;
+    req.userId = userId;
     next();
   } catch (error) {
-    res.status(401).send("Invalid token");
+    res.status(401).send(error);
   }
 };

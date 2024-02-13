@@ -1,18 +1,16 @@
-import { verify, JwtPayload } from "jsonwebtoken";
 import { Socket } from "socket.io";
 
-import { SECRET_KEY } from "constants/settings";
+import { verifyToken } from "utils/verifyToken";
 
-export const socketsAuth = (socket: Socket, next: (err?: any) => void) => {
+export const socketsAuth = async (
+  socket: Socket,
+  next: (err?: any) => void
+) => {
   const token = socket.handshake.auth.token;
   try {
-    if (!token) throw new Error("Authentication token missing");
-    const decoded = verify(token, SECRET_KEY);
-    const userId = (decoded as JwtPayload).id;
-    if (!userId) throw new Error("Invalid authentication token");
-
+    await verifyToken(token);
     next();
-  } catch (error: any) {
+  } catch (error) {
     next(error);
   }
 };
