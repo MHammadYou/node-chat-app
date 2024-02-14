@@ -1,30 +1,50 @@
-import { Request, Response } from "express";
+import { Server, Socket } from "socket.io";
 
-import { CreateMessagePayload } from "@lib/api/chat/types";
+import { CreateMessagePayload, Message } from "@lib/api/chat/types";
+import { CHAT_EVENTS } from "@lib/constants/chat-events";
 import { ApiError } from "@lib/api/types";
 
-import { createMessage as createMessageObject } from "models/messages";
+import {
+  createMessage as createMessageObject,
+  findPopulatedMessage,
+} from "models/messages";
+import { verifyToken } from "utils/verifyToken";
 
-export const createMessage = async (
-  req: Request<{}, {}, CreateMessagePayload>,
-  res: Response<{} | ApiError>
-) => {
-  const { text, chatId } = req.body;
-  try {
-    const message = await createMessageObject(text, req.userId, chatId);
-    if (message instanceof Error) {
-      throw message;
+export const createMessage = async (io: Server, socket: Socket) => {
+  const userId = await verifyToken(socket.handshake.auth.token);
+
+  socket.on(
+    CHAT_EVENTS.createMessage,
+    async ({ text, chatId }: CreateMessagePayload, callback) => {
+      try {
+        const message = await createMessageObject(text, userId, chatId);
+        if (message instanceof Error) {
+          throw message;
+        }
+
+        const populatedMessage = await findPopulatedMessage(message._id);
+
+        if (!populatedMessage) throw new Error("Something went wrong");
+
+        const populatedResponse: Message = {
+          id: populatedMessage._id,
+          text: populatedMessage.text,
+          username: populatedMessage.user.username,
+        };
+
+        const response = {
+          status: 201,
+          data: message,
+        };
+        socket.broadcast.emit(CHAT_EVENTS.sendMessage, populatedResponse);
+        callback(response);
+      } catch (error: any) {
+        const response: ApiError = {
+          status: 422,
+          message: error.message,
+        };
+        callback(response);
+      }
     }
-    res.status(201).json({});
-  } catch (error) {
-    const [message, status] =
-      error instanceof Error
-        ? [error.message, 401]
-        : ["Something went wrong", 500];
-    const response: ApiError = {
-      status,
-      message,
-    };
-    res.status(status).json(response);
-  }
+  );
 };

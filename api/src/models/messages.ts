@@ -11,6 +11,11 @@ export type PopulatedMessage = {
   user: User;
 };
 
+export type PopulatedUser = {
+  username: string;
+  email: string;
+};
+
 export type MessagesDocument = Document & {
   text: string;
   user: Schema.Types.ObjectId;
@@ -52,6 +57,22 @@ export const createMessage = async (
   }
 
   return message;
+};
+
+export const findPopulatedMessage = async (
+  id: Schema.Types.ObjectId | string
+) => {
+  try {
+    return await Messages.findById(id)
+      .populate<{ user: PopulatedUser }>({
+        path: "user",
+        model: "Users",
+      })
+      .exec();
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
 };
 
 export default Messages;

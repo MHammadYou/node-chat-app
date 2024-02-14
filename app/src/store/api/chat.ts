@@ -1,6 +1,7 @@
 import apiSlice from ".";
 
 import { API_ENDPOINTS } from "@lib/constants/api-endpoints.ts";
+import { CHAT_EVENTS } from "@lib/constants/chat-events";
 import { ChatResponse, Message } from "@lib/api/chat/types.ts";
 
 import { getSocket } from "utils/socket";
@@ -20,7 +21,7 @@ const chatApi = apiSlice.injectEndpoints({
 
           const socket = getSocket();
 
-          socket.on("chat", (message: Message) => {
+          socket.on(CHAT_EVENTS.sendMessage, (message: Message) => {
             updateCachedData((draft) => {
               draft.messages.push(message);
             });
