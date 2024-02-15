@@ -1,8 +1,11 @@
 import { Server, Socket } from "socket.io";
 
-import { CreateMessagePayload, Message } from "@lib/api/chat/types";
-import { CHAT_EVENTS } from "@lib/constants/chat-events";
-import { ApiError } from "@lib/api/types";
+import {
+  CreateMessagePayload,
+  Message,
+  CHAT_EVENTS,
+  ApiError,
+} from "@lib/index";
 
 import {
   createMessage as createMessageObject,

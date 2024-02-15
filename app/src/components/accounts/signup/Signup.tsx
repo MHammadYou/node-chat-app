@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 
-import { ApiError } from "@lib/api/types";
+import { ApiError } from "@lib/index";
 import ROUTES from "constants/routes";
 
 import { useCreateUserMutation } from "store/api/accounts";

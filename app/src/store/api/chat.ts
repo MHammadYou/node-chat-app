@@ -1,8 +1,6 @@
 import apiSlice from ".";
 
-import { API_ENDPOINTS } from "@lib/constants/api-endpoints.ts";
-import { CHAT_EVENTS } from "@lib/constants/chat-events";
-import { ChatResponse, Message } from "@lib/api/chat/types.ts";
+import { API_ENDPOINTS, CHAT_EVENTS, ChatResponse, Message } from "@lib/index";
 
 import { getSocket } from "utils/socket";
 

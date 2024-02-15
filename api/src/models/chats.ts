@@ -1,6 +1,6 @@
 import { Document, Schema, model } from "mongoose";
 
-import { ChatResponse } from "@lib/api/chat/types";
+import { ChatResponse } from "@lib/index";
 
 import { PopulatedMessage } from "./messages";
 

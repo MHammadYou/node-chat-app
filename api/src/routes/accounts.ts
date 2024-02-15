@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { API_ENDPOINTS } from "@lib/constants/api-endpoints";
+import { API_ENDPOINTS } from "@lib/index";
 
 import { createUser, loginUser } from "controllers/accounts";
 

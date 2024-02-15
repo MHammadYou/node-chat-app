@@ -1,6 +1,6 @@
 import { object, string, ObjectSchema, ref } from "yup";
 
-import { User } from "@lib/types/entities";
+import { User } from "@lib/index";
 
 type SignupValidationType = User & {
   confirmPassword: string;

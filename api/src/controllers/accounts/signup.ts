@@ -1,9 +1,7 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 
-import { UserAuthenticationResponse } from "@lib/api/accounts/types";
-import { User } from "@lib/types/entities";
-import { ApiError } from "@lib/api/types";
+import { UserAuthenticationResponse, User, ApiError } from "@lib/index";
 
 import Users from "models/users";
 import { isExistingEmail, isExsitingUsername } from "models/users";

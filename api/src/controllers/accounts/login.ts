@@ -4,8 +4,8 @@ import bcrypt from "bcrypt";
 import {
   UserAuthenticationResponse,
   UserLoginPayload,
-} from "@lib/api/accounts/types";
-import { ApiError } from "@lib/api/types";
+  ApiError,
+} from "@lib/index";
 
 import { findUserByEmail } from "models/users";
 import { signToken } from "utils/signToken";

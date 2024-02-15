@@ -1,7 +1,6 @@
 import apiSlice from ".";
 
-import { CHAT_EVENTS } from "@lib/constants/chat-events.ts";
-import { CreateMessagePayload } from "@lib/api/chat/types.ts";
+import { CHAT_EVENTS, CreateMessagePayload } from "@lib/index";
 
 import { getSocket } from "utils/socket";
 

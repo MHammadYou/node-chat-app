@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 
-import { Message as MessageType } from "@lib/api/chat/types";
+import { Message as MessageType } from "@lib/index";
 
 import Message from "./Message";
 

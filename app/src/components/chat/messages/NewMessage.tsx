@@ -2,7 +2,7 @@ import { styled, Box, BoxProps, IconButton } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { useFormik } from "formik";
 
-import { ApiError } from "@lib/api/types";
+import { ApiError } from "@lib/index";
 
 import TextField from "lib/TextField";
 import useToast, { ToastType } from "hooks/useToast";
@@ -35,9 +35,12 @@ const NewMessage: React.FC = () => {
         }).unwrap();
         useToast("Message created", ToastType.SUCCESS);
       } catch (error) {
-        // TODO: Handle errors
-        console.log(error);
-        useToast("Something went wrong", ToastType.ERROR);
+        const { status, data } = getSerializedError<ApiError>(error);
+        if (typeof status === "number") {
+          useToast(data.message, ToastType.ERROR);
+        } else {
+          useToast("Something went wrong", ToastType.ERROR);
+        }
       }
 
       formik.resetForm();

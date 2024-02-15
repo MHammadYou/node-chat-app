@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 
-import { ChatResponse } from "@lib/api/chat/types";
-import { ApiError } from "@lib/api/types";
+import { ChatResponse, ApiError } from "@lib/index";
 
 import { findPopulatedChat } from "models/chats";
 

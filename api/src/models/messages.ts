@@ -1,6 +1,6 @@
 import { Schema, Document, model } from "mongoose";
 
-import { User } from "@lib/types/entities";
+import { User } from "@lib/index";
 
 import { isExistingUserId } from "./users";
 import Chats from "./chats";

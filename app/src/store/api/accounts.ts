@@ -1,11 +1,11 @@
 import apiSlice from ".";
 
-import { API_ENDPOINTS } from "@lib/constants/api-endpoints.ts";
-import { User } from "@lib/types/entities";
 import {
+  API_ENDPOINTS,
+  User,
   UserAuthenticationResponse,
   UserLoginPayload,
-} from "@lib/api/accounts/types";
+} from "@lib/index";
 
 const accountsApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
