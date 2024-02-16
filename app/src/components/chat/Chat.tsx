@@ -16,6 +16,7 @@ const Chat: React.FC = () => {
   const { data, error, isLoading } = useGetChatQuery();
 
   if (isLoading) return <Loading />;
+  // TODO: Add Error Boundary
   if (error) console.log(error);
 
   return (

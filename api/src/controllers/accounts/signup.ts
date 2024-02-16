@@ -27,7 +27,7 @@ export const createUser = async (
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new Users({
       username,
-      email,
+      email: email.toLocaleLowerCase(),
       password: hashedPassword,
     });
 

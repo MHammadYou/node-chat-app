@@ -13,7 +13,6 @@ const messagesApi = apiSlice.injectEndpoints({
           socket.emit(
             CHAT_EVENTS.createMessage,
             messagePayload,
-            // TODO: Update response type
             (data: any) => {
               return resolve({ data });
             }

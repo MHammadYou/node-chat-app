@@ -17,7 +17,7 @@ export const loginUser = async (
   const { email, password } = req.body;
 
   try {
-    const user = await findUserByEmail(email);
+    const user = await findUserByEmail(email.toLocaleLowerCase());
 
     if (!user) throw new Error("User doesn't exist");
 
