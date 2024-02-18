@@ -39,7 +39,7 @@ export const createMessage = async (io: Server, socket: Socket) => {
           status: 201,
           data: message,
         };
-        socket.broadcast.emit(CHAT_EVENTS.sendMessage, populatedResponse);
+        io.emit(CHAT_EVENTS.sendMessage, populatedResponse);
         callback(response);
       } catch (error: any) {
         const response: ApiError = {
