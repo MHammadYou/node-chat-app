@@ -1,10 +1,18 @@
-import { Box, Typography } from "@mui/material";
+import { Box, BoxProps, styled } from "@mui/material";
+
+import ChatList from "components/chat/ChatList";
+import Chat from "components/chat/Chat";
+
+const StyledHome = styled(Box)<BoxProps>(() => ({
+  display: "flex",
+}));
 
 const Home: React.FC = () => {
   return (
-    <Box>
-      <Typography>Chat APP</Typography>
-    </Box>
+    <StyledHome>
+      <ChatList />
+      <Chat />
+    </StyledHome>
   );
 };
 
