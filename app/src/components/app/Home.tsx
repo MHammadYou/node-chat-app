@@ -1,6 +1,6 @@
 import { Box, BoxProps, styled } from "@mui/material";
 
-import ChatList from "components/chat/ChatList";
+import ChatList from "components/chat-list";
 import Chat from "components/chat/Chat";
 
 const StyledHome = styled(Box)<BoxProps>(() => ({
