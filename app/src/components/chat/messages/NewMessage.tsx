@@ -16,7 +16,6 @@ const StyledNewMessage = styled(Box)<BoxProps>(() => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  width: "100%",
 }));
 
 const NewMessage: React.FC = () => {
@@ -49,7 +48,7 @@ const NewMessage: React.FC = () => {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <form onSubmit={formik.handleSubmit} style={{ width: "100%" }}>
       <StyledNewMessage>
         <TextField formik={formik} label="Type new message" name="message" />
         <IconButton type="submit" disabled={isLoading}>

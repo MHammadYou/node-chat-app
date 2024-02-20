@@ -6,10 +6,10 @@ import Loading from "lib/Loading";
 import { Messages, NewMessage } from "./messages";
 
 const StyledChat = styled(Box)<BoxProps>(() => ({
+  height: "100%",
   display: "flex",
   flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
+  justifyContent: "end",
 }));
 
 const Chat: React.FC = () => {

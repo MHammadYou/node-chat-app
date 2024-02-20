@@ -7,7 +7,7 @@ type Props = {
 
 const StyledItem = styled(Box)<BoxProps>(() => ({
   width: "100%",
-  height: "2.5rem",
+  height: "3rem",
   backgroundColor: "lightgrey",
   marginTop: "0.5rem",
   borderRadius: "0.25rem",

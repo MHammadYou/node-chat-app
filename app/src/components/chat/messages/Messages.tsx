@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { styled, Box, BoxProps } from "@mui/material";
 
 import { Message as MessageType } from "@lib/index";
 
@@ -8,13 +8,19 @@ type Props = {
   messages?: MessageType[];
 };
 
+const StyledMessages = styled(Box)<BoxProps>(() => ({
+  width: "100%",
+  display: "flex",
+  flexDirection: "column",
+}));
+
 const Messages: React.FC<Props> = ({ messages }) => {
   return (
-    <Box sx={{ width: "100%" }}>
+    <StyledMessages>
       {messages?.map(({ id, text, username }) => (
         <Message username={username} text={text} key={id} />
       ))}
-    </Box>
+    </StyledMessages>
   );
 };
 
