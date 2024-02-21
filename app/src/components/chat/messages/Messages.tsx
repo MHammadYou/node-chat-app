@@ -10,8 +10,9 @@ type Props = {
 
 const StyledMessages = styled(Box)<BoxProps>(() => ({
   width: "100%",
-  display: "flex",
-  flexDirection: "column",
+  // TODO: Update later
+  height: "81vh",
+  overflow: "auto",
 }));
 
 const Messages: React.FC<Props> = ({ messages }) => {
