@@ -1,6 +1,6 @@
 import useCookie from "./useCookie";
 
-const useAuth = () => {
+const useAuth = (): boolean => {
   const { cookie } = useCookie("token");
   return !!cookie;
 };
