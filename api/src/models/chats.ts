@@ -7,11 +7,15 @@ import { PopulatedMessage } from "./messages";
 // TODO: Add Users later
 export type ChatsDocument = Document & {
   messages: Schema.Types.ObjectId[];
+  isGroup: boolean;
+  name?: string;
   // users: Schema.Types.ObjectId[];
 };
 
 const chatsSchema = new Schema<ChatsDocument>({
   messages: [{ type: Schema.Types.ObjectId, ref: "Messages" }],
+  isGroup: Boolean,
+  name: String,
   // users: [{ type: Schema.Types.ObjectId, ref: "Users" }],
 });
 
@@ -43,6 +47,8 @@ export const findPopulatedChat = async (): Promise<ChatResponse | null> => {
             };
           })
         : [],
+      isGroup: chat.isGroup,
+      name: chat.name,
     };
   }
   return null;

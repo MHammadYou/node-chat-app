@@ -2,6 +2,8 @@
 export type ChatResponse = {
   id: string;
   messages: Message[];
+  isGroup: boolean;
+  name?: string;
 };
 
 export type Message = {

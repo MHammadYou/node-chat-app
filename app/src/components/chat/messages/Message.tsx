@@ -5,6 +5,7 @@ import useCookie from "hooks/useCookie";
 type Props = {
   username: string;
   text: string;
+  showUsername?: boolean;
 };
 
 const StyledMessage = styled(Box)<BoxProps & { ownMessage: boolean }>(
@@ -14,13 +15,13 @@ const StyledMessage = styled(Box)<BoxProps & { ownMessage: boolean }>(
   })
 );
 
-const Message: React.FC<Props> = ({ username, text }) => {
+const Message: React.FC<Props> = ({ username, text, showUsername }) => {
   const { cookie } = useCookie("username");
   const isOwnMessage = cookie === username;
 
   return (
     <StyledMessage ownMessage={isOwnMessage}>
-      {!isOwnMessage && (
+      {showUsername && !isOwnMessage && (
         <Typography variant="caption" sx={{ color: "grey" }}>
           {username}
         </Typography>

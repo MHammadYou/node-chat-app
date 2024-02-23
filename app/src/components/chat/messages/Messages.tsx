@@ -6,6 +6,8 @@ import Message from "./Message";
 
 type Props = {
   messages?: MessageType[];
+  isGroup?: boolean;
+  name?: string;
 };
 
 const StyledMessages = styled(Box)<BoxProps>(() => ({
@@ -15,11 +17,16 @@ const StyledMessages = styled(Box)<BoxProps>(() => ({
   overflow: "auto",
 }));
 
-const Messages: React.FC<Props> = ({ messages }) => {
+const Messages: React.FC<Props> = ({ messages, isGroup, name }) => {
   return (
     <StyledMessages>
       {messages?.map(({ id, text, username }) => (
-        <Message username={username} text={text} key={id} />
+        <Message
+          username={username}
+          text={text}
+          showUsername={isGroup}
+          key={id}
+        />
       ))}
     </StyledMessages>
   );
