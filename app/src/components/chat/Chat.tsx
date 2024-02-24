@@ -4,6 +4,7 @@ import { useGetChatQuery } from "store/api/chat";
 import Loading from "lib/Loading";
 
 import { Messages, NewMessage } from "./messages";
+import ChatHeader from "./ChatHeader";
 
 const StyledChat = styled(Box)<BoxProps>(() => ({
   height: "100%",
@@ -21,6 +22,7 @@ const Chat: React.FC = () => {
 
   return (
     <StyledChat>
+      <ChatHeader name={data?.name || "TODO"} />
       <Messages messages={data?.messages} />
       <NewMessage />
     </StyledChat>

@@ -13,7 +13,7 @@ type Props = {
 const StyledMessages = styled(Box)<BoxProps>(() => ({
   width: "100%",
   // TODO: Update later
-  height: "81vh",
+  height: "71.5vh",
   overflow: "auto",
 }));
 
