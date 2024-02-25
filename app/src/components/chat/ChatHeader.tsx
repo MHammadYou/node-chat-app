@@ -1,29 +1,25 @@
-import { VideoCall, VoiceChat } from "@mui/icons-material";
-import { styled, Box, BoxProps, Typography, IconButton } from "@mui/material";
+import { Call, VideoCallRounded } from "@mui/icons-material";
+import { Typography, IconButton, Stack, Card } from "@mui/material";
 
 type Props = {
   name: string;
 };
 
-const StyledChatHeader = styled(Box)<BoxProps>(() => ({
-  display: "flex",
-  justifyContent: "space-between",
-  border: "1px solid black",
-}));
-
 const ChatHeader: React.FC<Props> = ({ name }) => {
   return (
-    <StyledChatHeader>
-      <Typography p={2}>{name}</Typography>
-      <Box>
-        <IconButton sx={{ borderRadius: "0" }} size="large">
-          <VoiceChat />
-        </IconButton>
-        <IconButton sx={{ borderRadius: "0" }} size="large">
-          <VideoCall />
-        </IconButton>
-      </Box>
-    </StyledChatHeader>
+    <Card>
+      <Stack direction="row" justifyContent="space-between">
+        <Typography p={2}>{name}</Typography>
+        <Stack direction="row" mr={2} spacing={1}>
+          <IconButton sx={{ borderRadius: "0" }} size="large">
+            <Call />
+          </IconButton>
+          <IconButton sx={{ borderRadius: "0" }} size="large">
+            <VideoCallRounded />
+          </IconButton>
+        </Stack>
+      </Stack>
+    </Card>
   );
 };
 
