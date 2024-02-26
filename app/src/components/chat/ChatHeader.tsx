@@ -11,10 +11,10 @@ const ChatHeader: React.FC<Props> = ({ name }) => {
       <Stack direction="row" justifyContent="space-between">
         <Typography p={2}>{name}</Typography>
         <Stack direction="row" mr={2} spacing={1}>
-          <IconButton sx={{ borderRadius: "0" }} size="large">
+          <IconButton size="large">
             <Call />
           </IconButton>
-          <IconButton sx={{ borderRadius: "0" }} size="large">
+          <IconButton size="large">
             <VideoCallRounded />
           </IconButton>
         </Stack>

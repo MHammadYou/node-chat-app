@@ -1,17 +1,10 @@
-import { styled, Box, BoxProps } from "@mui/material";
+import { Stack } from "@mui/material";
 
 import { useGetChatQuery } from "store/api/chat";
 import Loading from "lib/Loading";
 
 import { Messages, NewMessage } from "./messages";
 import ChatHeader from "./ChatHeader";
-
-const StyledChat = styled(Box)<BoxProps>(() => ({
-  height: "100%",
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "end",
-}));
 
 const Chat: React.FC = () => {
   const { data, error, isLoading } = useGetChatQuery();
@@ -21,11 +14,11 @@ const Chat: React.FC = () => {
   if (error) console.log(error);
 
   return (
-    <StyledChat>
+    <Stack>
       <ChatHeader name={data?.name || "TODO"} />
       <Messages messages={data?.messages} />
       <NewMessage />
-    </StyledChat>
+    </Stack>
   );
 };
 

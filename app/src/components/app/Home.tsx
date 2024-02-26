@@ -5,7 +5,7 @@ import Chat from "components/chat/Chat";
 
 const Home: React.FC = () => {
   return (
-    <Stack direction={"row"} height={"100%"}>
+    <Stack direction={"row"} height={"100%"} spacing={0.5}>
       <Box flex={3}>
         <ChatList />
       </Box>

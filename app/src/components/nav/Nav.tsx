@@ -11,7 +11,7 @@ const StyledNav = styled(AppBar)<AppBarProps>(() => ({
 
 const Nav: React.FC = () => {
   return (
-    <StyledNav elevation={1} position="static">
+    <StyledNav elevation={0} position="static">
       <AppTitle />
       <NavLinks />
     </StyledNav>
