@@ -1,4 +1,4 @@
-import { Stack } from "@mui/material";
+import { Divider, Stack } from "@mui/material";
 
 import { useGetChatQuery } from "store/api/chat";
 import Loading from "lib/Loading";
@@ -14,7 +14,7 @@ const Chat: React.FC = () => {
   if (error) console.log(error);
 
   return (
-    <Stack>
+    <Stack divider={<Divider />}>
       <ChatHeader name={data?.name || "TODO"} />
       <Messages messages={data?.messages} />
       <NewMessage />

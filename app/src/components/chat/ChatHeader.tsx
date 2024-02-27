@@ -1,5 +1,5 @@
-import { Call, VideoCallRounded } from "@mui/icons-material";
-import { Typography, IconButton, Stack, Card } from "@mui/material";
+import { Typography, IconButton, Stack } from "@mui/material";
+import { CallRounded, VideoCallRounded } from "@mui/icons-material";
 
 type Props = {
   name: string;
@@ -7,19 +7,17 @@ type Props = {
 
 const ChatHeader: React.FC<Props> = ({ name }) => {
   return (
-    <Card>
-      <Stack direction="row" justifyContent="space-between">
-        <Typography p={2}>{name}</Typography>
-        <Stack direction="row" mr={2} spacing={1}>
-          <IconButton size="large">
-            <Call />
-          </IconButton>
-          <IconButton size="large">
-            <VideoCallRounded />
-          </IconButton>
-        </Stack>
+    <Stack direction="row" justifyContent="space-between">
+      <Typography p={2}>{name}</Typography>
+      <Stack direction="row" mr={2} spacing={1}>
+        <IconButton size="large">
+          <CallRounded />
+        </IconButton>
+        <IconButton size="large">
+          <VideoCallRounded />
+        </IconButton>
       </Stack>
-    </Card>
+    </Stack>
   );
 };
 

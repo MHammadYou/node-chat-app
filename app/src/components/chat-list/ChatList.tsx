@@ -12,7 +12,7 @@ const ChatList: React.FC = () => {
   const chats = ["Chat 1", "Chat 2", "Chat 3"];
 
   return (
-    <List sx={{ width: "100%", bgcolor: "background.paper" }}>
+    <List sx={{ width: "100%", bgcolor: "background.paper" }} disablePadding>
       {chats.map((chat) => (
         <>
           <ListItem>
