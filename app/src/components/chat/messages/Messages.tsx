@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { styled, Box, BoxProps } from "@mui/material";
 
 import { Message as MessageType } from "@lib/index";
@@ -17,8 +18,16 @@ const StyledMessages = styled(Box)<BoxProps>(() => ({
 }));
 
 const Messages: React.FC<Props> = ({ messages, isGroup }) => {
+  const ref = useRef<HTMLElement>();
+
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.scrollTop = ref.current.scrollHeight;
+    }
+  }, [ref, messages]);
+
   return (
-    <StyledMessages>
+    <StyledMessages ref={ref}>
       {messages?.map(({ id, text, username }) => (
         <Message
           username={username}
