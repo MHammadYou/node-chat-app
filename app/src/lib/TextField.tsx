@@ -1,4 +1,5 @@
 import InputField from "@mui/material/TextField";
+import { SxProps, Theme } from "@mui/material/styles";
 
 export type FormikType = {
   values: Record<string, any>;
@@ -14,9 +15,16 @@ type Props = {
   label: string;
   name: string;
   type?: string;
+  sx?: SxProps<Theme>;
 };
 
-const TextField: React.FC<Props> = ({ formik, label, name, type = "text" }) => {
+const TextField: React.FC<Props> = ({
+  formik,
+  label,
+  name,
+  type = "text",
+  sx,
+}) => {
   return (
     <InputField
       label={label}
@@ -28,9 +36,7 @@ const TextField: React.FC<Props> = ({ formik, label, name, type = "text" }) => {
       error={formik.touched[name] && Boolean(formik.errors[name])}
       helperText={formik.touched[name] && formik.errors[name]}
       size="small"
-      sx={{
-        my: 1,
-      }}
+      sx={sx}
     />
   );
 };

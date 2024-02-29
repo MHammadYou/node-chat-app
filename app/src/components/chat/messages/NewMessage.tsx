@@ -1,4 +1,4 @@
-import { styled, Box, BoxProps, IconButton } from "@mui/material";
+import { Stack, Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { useFormik } from "formik";
 
@@ -11,12 +11,6 @@ import { getSerializedError } from "store/api";
 import { useAppSelector } from "store/hooks";
 import { useCreateMessageMutation } from "store/api/messages";
 import { selectChat } from "store/api/selectors/chat";
-
-const StyledNewMessage = styled(Box)<BoxProps>(() => ({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
 
 const NewMessage: React.FC = () => {
   const [createMessage, { isLoading }] = useCreateMessageMutation();
@@ -48,13 +42,30 @@ const NewMessage: React.FC = () => {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit} style={{ width: "100%" }}>
-      <StyledNewMessage>
-        <TextField formik={formik} label="Type new message" name="message" />
-        <IconButton type="submit" disabled={isLoading}>
+    // TODO: Update height later
+    <form onSubmit={formik.handleSubmit} style={{ height: "9.25vh" }}>
+      <Stack
+        direction="row"
+        alignItems="center"
+        spacing={1}
+        height="100%"
+        px={8}
+      >
+        <TextField
+          formik={formik}
+          label="Type new message"
+          name="message"
+          sx={{ flex: 1 }}
+        />
+        <Button
+          type="submit"
+          disabled={isLoading || !formik.values.message}
+          variant="contained"
+          size="large"
+        >
           <SendIcon />
-        </IconButton>
-      </StyledNewMessage>
+        </Button>
+      </Stack>
     </form>
   );
 };
