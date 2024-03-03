@@ -7,6 +7,7 @@ import {
 } from "@mui/material";
 
 import { getColorPalette } from "./theme";
+import { globalStyles } from "./globalStyles";
 
 export const ToggleThemeContext = createContext(() => {});
 
@@ -33,6 +34,7 @@ const Theme: React.FC<Props> = ({ children }) => {
     <ThemeProvider theme={theme}>
       <ToggleThemeContext.Provider value={toggleTheme}>
         <CssBaseline>{children}</CssBaseline>
+        {globalStyles}
       </ToggleThemeContext.Provider>
     </ThemeProvider>
   );
