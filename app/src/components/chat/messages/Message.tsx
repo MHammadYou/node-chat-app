@@ -1,4 +1,4 @@
-import { styled, Typography, Box, BoxProps } from "@mui/material";
+import { Typography, Paper } from "@mui/material";
 
 import useCookie from "hooks/useCookie";
 
@@ -8,26 +8,26 @@ type Props = {
   showUsername?: boolean;
 };
 
-const StyledMessage = styled(Box)<BoxProps & { ownMessage: boolean }>(
-  ({ ownMessage }) => ({
-    padding: "0.5rem",
-    textAlign: ownMessage ? "right" : "left",
-  })
-);
-
 const Message: React.FC<Props> = ({ username, text, showUsername }) => {
   const { cookie } = useCookie("username");
   const isOwnMessage = cookie === username;
 
   return (
-    <StyledMessage ownMessage={isOwnMessage}>
+    <Paper
+      sx={{
+        textAlign: isOwnMessage ? "right" : "left",
+        p: 1,
+        m: 1,
+      }}
+      elevation={0}
+    >
       {showUsername && !isOwnMessage && (
-        <Typography variant="caption" sx={{ color: "grey" }}>
+        <Typography variant="caption" color="grey">
           {username}
         </Typography>
       )}
       <Typography>{text}</Typography>
-    </StyledMessage>
+    </Paper>
   );
 };
 

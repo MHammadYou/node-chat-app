@@ -13,7 +13,7 @@ const ChatHeader: React.FC<Props> = ({ name }) => {
   return (
     <Stack direction="row" justifyContent="space-between" px={2} py={0.5}>
       <Stack direction="row" alignItems="center" spacing={1}>
-        <Avatar>
+        <Avatar sx={{ width: 32, height: 32 }}>
           <ImageRounded />
         </Avatar>
         <Typography>{name}</Typography>
