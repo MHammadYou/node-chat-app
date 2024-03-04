@@ -8,6 +8,7 @@ export const globalStyles = (
       },
       "::-webkit-scrollbar-thumb": {
         backgroundColor: theme.palette.primary.light,
+        borderRadius: "3px",
       },
       "::-webkit-scrollbar-track": {
         backgroundColor: theme.palette.primary.main,

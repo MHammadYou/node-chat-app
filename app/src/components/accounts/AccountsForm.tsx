@@ -54,6 +54,7 @@ const AccountsForm: React.FC<Props> = ({
             name={name}
             type={type}
             key={name}
+            sx={{ m: 1 }}
           />
         ))}
 

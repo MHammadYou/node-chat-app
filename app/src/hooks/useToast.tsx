@@ -11,7 +11,7 @@ export enum ToastType {
 const useToast = (message: string, type: ToastType) => {
   return toast(message, {
     type: type,
-    position: "bottom-right",
+    position: "top-right",
   });
 };
 
