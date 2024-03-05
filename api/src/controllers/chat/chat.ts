@@ -20,7 +20,7 @@ export const getChat = async (
         ? [error.message, 404]
         : ["Something went wrong", 500];
 
-    res.status(404).json({
+    res.status(status).json({
       status,
       message,
     });

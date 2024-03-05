@@ -6,6 +6,13 @@ export type ChatResponse = {
   name?: string;
 };
 
+export type ChatListResponse = {
+  id: string;
+  isGroup: boolean;
+  name?: string;
+  lastMessage?: Message | any; // TODO: Update when populating last message
+}[];
+
 export type Message = {
   id: string;
   text: string;
