@@ -5,26 +5,38 @@ import {
   Avatar,
   ListItemText,
   Divider,
+  Box,
 } from "@mui/material";
 import { Image } from "@mui/icons-material";
 
+import { useGetChatsQuery } from "store/api/chat";
+import Loading from "lib/Loading";
+
 const ChatList: React.FC = () => {
-  const chats = ["Chat 1", "Chat 2", "Chat 3"];
+  const { data: chats, isLoading, error } = useGetChatsQuery();
+
+  if (isLoading) return <Loading />;
+  if (error) return <div>{error.toString()}</div>;
+
+  if (!chats) return <>TODO: Add no available chat screen</>;
 
   return (
     <List sx={{ width: "100%", bgcolor: "background.paper" }} disablePadding>
-      {chats.map((chat) => (
-        <>
+      {chats.map(({ id, isGroup, lastMessage, name }) => (
+        <Box key={id}>
           <ListItem>
             <ListItemAvatar>
               <Avatar>
                 <Image />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText primary={chat} secondary="Last message" />
+            <ListItemText
+              primary={name || "TODO: Add chat name"}
+              secondary={lastMessage || "Last message"}
+            />
           </ListItem>
           <Divider />
-        </>
+        </Box>
       ))}
     </List>
   );

@@ -1,6 +1,12 @@
 import apiSlice from ".";
 
-import { API_ENDPOINTS, CHAT_EVENTS, ChatResponse, Message } from "@lib/index";
+import {
+  API_ENDPOINTS,
+  CHAT_EVENTS,
+  ChatResponse,
+  ChatListResponse,
+  Message,
+} from "@lib/index";
 
 import { getSocket } from "utils/socket";
 
@@ -31,9 +37,14 @@ const chatApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    getChats: builder.query<ChatListResponse, void>({
+      query: () => ({
+        url: API_ENDPOINTS.chats,
+      }),
+    }),
   }),
 });
 
-export const { useGetChatQuery } = chatApi;
+export const { useGetChatQuery, useGetChatsQuery } = chatApi;
 
 export default chatApi;
