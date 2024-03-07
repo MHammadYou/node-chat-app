@@ -12,7 +12,11 @@ import { Image } from "@mui/icons-material";
 import { useGetChatsQuery } from "store/api/chat";
 import Loading from "lib/Loading";
 
-const ChatList: React.FC = () => {
+type Props = {
+  setSelectedChat: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const ChatList: React.FC<Props> = ({ setSelectedChat }) => {
   const { data: chats, isLoading, error } = useGetChatsQuery();
 
   if (isLoading) return <Loading />;
@@ -23,7 +27,7 @@ const ChatList: React.FC = () => {
   return (
     <List sx={{ width: "100%", bgcolor: "background.paper" }} disablePadding>
       {chats.map(({ id, isGroup, lastMessage, name }) => (
-        <Box key={id}>
+        <Box key={id} onClick={() => setSelectedChat(id)}>
           <ListItem>
             <ListItemAvatar>
               <Avatar>

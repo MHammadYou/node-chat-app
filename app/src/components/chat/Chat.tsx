@@ -6,7 +6,11 @@ import Loading from "lib/Loading";
 import { Messages, NewMessage } from "./messages";
 import ChatHeader from "./ChatHeader";
 
-const Chat: React.FC = () => {
+type Props = {
+  selectedChat: string;
+};
+
+const Chat: React.FC<Props> = ({ selectedChat }) => {
   const { data, error, isLoading } = useGetChatQuery();
 
   if (isLoading) return <Loading />;
