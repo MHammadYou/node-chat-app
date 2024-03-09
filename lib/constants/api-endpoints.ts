@@ -1,7 +1,7 @@
-export enum API_ENDPOINTS {
-  signup = "/signup",
-  login = "/login",
-  chat = "/chat",
-  chats = "/chats",
-  createMessage = "/messages/create",
-}
+export const ApiEndpoints = {
+  signup: () => "/signup",
+  login: () => "/login",
+  chat: (id: string) => `/chat/${id}`,
+  chats: () => "/chats",
+  createMessage: () => "/messages/create",
+};

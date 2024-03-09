@@ -1,7 +1,7 @@
 import apiSlice from ".";
 
 import {
-  API_ENDPOINTS,
+  ApiEndpoints,
   CHAT_EVENTS,
   ChatResponse,
   ChatListResponse,
@@ -12,9 +12,9 @@ import { getSocket } from "utils/socket";
 
 const chatApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getChat: builder.query<ChatResponse, void>({
-      query: () => ({
-        url: API_ENDPOINTS.chat,
+    getChat: builder.query<ChatResponse, string>({
+      query: (id) => ({
+        url: ApiEndpoints.chat(id),
       }),
       async onCacheEntryAdded(
         _arg,
@@ -39,7 +39,7 @@ const chatApi = apiSlice.injectEndpoints({
     }),
     getChats: builder.query<ChatListResponse, void>({
       query: () => ({
-        url: API_ENDPOINTS.chats,
+        url: ApiEndpoints.chats(),
       }),
     }),
   }),

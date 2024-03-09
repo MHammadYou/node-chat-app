@@ -1,12 +1,12 @@
 import { Router } from "express";
 
-import { API_ENDPOINTS } from "@lib/index";
+import { ApiEndpoints } from "@lib/index";
 
 import { createUser, loginUser } from "controllers/accounts";
 
 const router = Router();
 
-router.post(API_ENDPOINTS.signup, createUser);
-router.post(API_ENDPOINTS.login, loginUser);
+router.post(ApiEndpoints.signup(), createUser);
+router.post(ApiEndpoints.login(), loginUser);
 
 export default router;

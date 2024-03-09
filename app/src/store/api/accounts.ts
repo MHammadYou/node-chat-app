@@ -1,7 +1,7 @@
 import apiSlice from ".";
 
 import {
-  API_ENDPOINTS,
+  ApiEndpoints,
   User,
   UserAuthenticationResponse,
   UserLoginPayload,
@@ -11,14 +11,14 @@ const accountsApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createUser: builder.mutation<UserAuthenticationResponse, User>({
       query: (body) => ({
-        url: API_ENDPOINTS.signup,
+        url: ApiEndpoints.signup(),
         method: "POST",
         body,
       }),
     }),
     loginUser: builder.mutation<UserAuthenticationResponse, UserLoginPayload>({
       query: (body) => ({
-        url: API_ENDPOINTS.login,
+        url: ApiEndpoints.login(),
         method: "POST",
         body,
       }),
