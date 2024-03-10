@@ -2,14 +2,15 @@ import { Request, Response } from "express";
 
 import { ChatResponse, ApiError } from "@lib/index";
 
-import { findPopulatedChat } from "models/chats";
+import { findPopulatedChatById } from "models/chats";
 
 export const getChat = async (
   req: Request,
   res: Response<ChatResponse | ApiError>
 ) => {
   try {
-    const chat = await findPopulatedChat();
+    const { id } = req.params;
+    const chat = await findPopulatedChatById(id);
 
     if (!chat) throw new Error("Can't find chat");
 

@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 
 import Chats from "models/chats";
 
-import { ChatListResponse, ApiError, Message } from "@lib/api";
+import { ChatListResponse, ApiError } from "@lib/api";
 
 export const getChats = async (
   req: Request,

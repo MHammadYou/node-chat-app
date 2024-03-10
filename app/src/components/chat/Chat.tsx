@@ -11,7 +11,7 @@ type Props = {
 };
 
 const Chat: React.FC<Props> = ({ selectedChat }) => {
-  const { data, error, isLoading } = useGetChatQuery();
+  const { data, error, isLoading } = useGetChatQuery(selectedChat);
 
   if (isLoading) return <Loading />;
   // TODO: Add Error Boundary
@@ -21,7 +21,7 @@ const Chat: React.FC<Props> = ({ selectedChat }) => {
     <Stack divider={<Divider />}>
       <ChatHeader name={data?.name || "TODO"} />
       <Messages messages={data?.messages} />
-      <NewMessage />
+      <NewMessage chatId={selectedChat} />
     </Stack>
   );
 };

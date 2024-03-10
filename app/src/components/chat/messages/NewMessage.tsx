@@ -8,13 +8,14 @@ import TextField from "lib/TextField";
 import useToast, { ToastType } from "hooks/useToast";
 
 import { getSerializedError } from "store/api";
-import { useAppSelector } from "store/hooks";
 import { useCreateMessageMutation } from "store/api/messages";
-import { selectChat } from "store/api/selectors/chat";
 
-const NewMessage: React.FC = () => {
+type Props = {
+  chatId: string;
+};
+
+const NewMessage: React.FC<Props> = ({ chatId }) => {
   const [createMessage, { isLoading }] = useCreateMessageMutation();
-  const chat = useAppSelector(selectChat);
 
   const formik = useFormik({
     initialValues: {
@@ -24,7 +25,7 @@ const NewMessage: React.FC = () => {
       try {
         await createMessage({
           text: values.message,
-          chatId: chat!.id,
+          chatId,
         }).unwrap();
         useToast("Message created", ToastType.SUCCESS);
       } catch (error) {

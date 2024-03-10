@@ -22,8 +22,10 @@ const chatsSchema = new Schema<ChatsDocument>({
 const Chats = model<ChatsDocument>("Chats", chatsSchema);
 
 // TODO: Update later, findChat -> findChatById
-export const findPopulatedChat = async (): Promise<ChatResponse | null> => {
-  const chat = await Chats.findOne({})
+export const findPopulatedChatById = async (
+  id: string
+): Promise<ChatResponse | null> => {
+  const chat = await Chats.findById(id)
     .populate<{ messages: PopulatedMessage[] }>({
       path: "messages",
       model: "Messages",
