@@ -36,7 +36,7 @@ const ChatList: React.FC<Props> = ({ setSelectedChat }) => {
             </ListItemAvatar>
             <ListItemText
               primary={name || "TODO: Add chat name"}
-              secondary={lastMessage || "Last message"}
+              secondary={lastMessage?.text || "Last message"}
             />
           </ListItem>
           <Divider />

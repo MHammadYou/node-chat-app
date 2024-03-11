@@ -10,7 +10,7 @@ export type ChatListResponse = {
   id: string;
   isGroup: boolean;
   name?: string;
-  lastMessage?: Message | any; // TODO: Update when populating last message
+  lastMessage?: Message;
 }[];
 
 export type Message = {

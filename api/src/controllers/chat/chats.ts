@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import Chats from "models/chats";
+import { findPopulatedChatsList } from "models/response/chats";
 
 import { ChatListResponse, ApiError } from "@lib/api";
 
@@ -10,16 +10,8 @@ export const getChats = async (
 ) => {
   // TODO: Update to include only specific user chats
   try {
-    const chats = await Chats.find();
-
-    const response = chats.map(({ _id, name, isGroup, messages }) => ({
-      id: _id,
-      name,
-      isGroup,
-      lastMessage: messages[messages.length - 1],
-    }));
-
-    res.send(response);
+    const response = await findPopulatedChatsList();
+    res.status(200).json(response);
   } catch (error) {
     res.status(500).json({
       status: 500,
