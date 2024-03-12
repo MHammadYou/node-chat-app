@@ -19,6 +19,9 @@ type Props = {
 const ChatList: React.FC<Props> = ({ setSelectedChat }) => {
   const { data: chats, isLoading, error } = useGetChatsQuery();
 
+  const formatMessage = (text: string, maxLength = 32) =>
+    text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
+
   if (isLoading) return <Loading />;
   if (error) return <div>{error.toString()}</div>;
 
@@ -27,8 +30,8 @@ const ChatList: React.FC<Props> = ({ setSelectedChat }) => {
   return (
     <List sx={{ width: "100%", bgcolor: "background.paper" }} disablePadding>
       {chats.map(({ id, isGroup, lastMessage, name }) => (
-        <Box key={id} onClick={() => setSelectedChat(id)}>
-          <ListItem>
+        <Box key={id}>
+          <ListItem onClick={() => setSelectedChat(id)}>
             <ListItemAvatar>
               <Avatar>
                 <Image />
@@ -38,8 +41,8 @@ const ChatList: React.FC<Props> = ({ setSelectedChat }) => {
               primary={name || "TODO: Add chat name"}
               secondary={
                 lastMessage
-                  ? (isGroup ? `${lastMessage.username} : ` : ``) +
-                    lastMessage.text
+                  ? `${isGroup ? lastMessage.username + ": " : ""}
+                    ${formatMessage(lastMessage.text)}`
                   : "No messages yet"
               }
             />
