@@ -1,6 +1,6 @@
 import { Typography, Paper } from "@mui/material";
 
-import useCookie from "hooks/useCookie";
+import useUser from "hooks/useUser";
 
 type Props = {
   username: string;
@@ -9,8 +9,8 @@ type Props = {
 };
 
 const Message: React.FC<Props> = ({ username, text, showUsername }) => {
-  const { cookie } = useCookie("username");
-  const isOwnMessage = cookie === username;
+  const user = useUser();
+  const isOwnMessage = user === username;
 
   return (
     <Paper
