@@ -4,4 +4,5 @@ export const ApiEndpoints = {
   chat: (id: string) => `/chat/${id}`,
   chats: () => "/chats",
   createMessage: () => "/messages/create",
+  userDetails: () => "/user-details",
 };
