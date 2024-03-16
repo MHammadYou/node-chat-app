@@ -1,11 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Box, Divider, Stack } from "@mui/material";
 
 import ChatList from "components/chat-list";
 import Chat from "components/chat/Chat";
 
+import { useAppDispatch } from "store/hooks";
+import accountsApi from "store/api/accounts";
+
 const Home: React.FC = () => {
+  const dispatch = useAppDispatch();
   const [selectedChat, setSelectedChat] = useState("");
+
+  useEffect(() => {
+    dispatch(accountsApi.endpoints.getUserDetails.initiate());
+  }, []);
 
   return (
     <Stack

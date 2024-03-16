@@ -4,6 +4,7 @@ import {
   ApiEndpoints,
   User,
   UserAuthenticationResponse,
+  UserDetails,
   UserLoginPayload,
 } from "@lib/index";
 
@@ -23,7 +24,15 @@ const accountsApi = apiSlice.injectEndpoints({
         body,
       }),
     }),
+    getUserDetails: builder.query<UserDetails, void>({
+      query: () => ApiEndpoints.userDetails(),
+    }),
   }),
 });
 
-export const { useCreateUserMutation, useLoginUserMutation } = accountsApi;
+export const {
+  useCreateUserMutation,
+  useLoginUserMutation,
+  useGetUserDetailsQuery,
+} = accountsApi;
+export default accountsApi;
