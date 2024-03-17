@@ -9,7 +9,7 @@ type Props = {
 };
 
 const Message: React.FC<Props> = ({ username, text, showUsername }) => {
-  const user = useUser();
+  const { username: user } = useUser();
   const isOwnMessage = user === username;
 
   return (

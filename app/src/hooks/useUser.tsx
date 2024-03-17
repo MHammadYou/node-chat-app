@@ -1,8 +1,9 @@
-import useCookie from "hooks/useCookie";
+import { useAppSelector } from "store/hooks";
+import { selectUserDetails } from "store/api/selectors/accounts";
 
 const useUser = () => {
-  const { cookie: username } = useCookie("username");
-  return username as string | undefined;
+  const { username, email } = useAppSelector(selectUserDetails);
+  return { username, email };
 };
 
 export default useUser;

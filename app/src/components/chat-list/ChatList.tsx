@@ -21,7 +21,7 @@ type Props = {
 const ChatList: React.FC<Props> = ({ setSelectedChat }) => {
   const { data: chats, isLoading, error } = useGetChatsQuery();
 
-  const user = useUser();
+  const { username: user } = useUser();
   const isOwnMessage = (username?: string) => username === user;
 
   const formatMessageLength = (text: string, maxLength = 32) =>
