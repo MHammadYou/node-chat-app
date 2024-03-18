@@ -11,7 +11,7 @@ import { Image } from "@mui/icons-material";
 
 import Loading from "lib/Loading";
 
-import useUser from "hooks/useUser";
+import useIsAuthor from "hooks/useIsAuthor";
 import { useGetChatsQuery } from "store/api/chat";
 
 type Props = {
@@ -21,8 +21,7 @@ type Props = {
 const ChatList: React.FC<Props> = ({ setSelectedChat }) => {
   const { data: chats, isLoading, error } = useGetChatsQuery();
 
-  const { username: user } = useUser();
-  const isOwnMessage = (username?: string) => username === user;
+  const { isAuthorFn } = useIsAuthor();
 
   const formatMessageLength = (text: string, maxLength = 32) =>
     text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
@@ -31,7 +30,7 @@ const ChatList: React.FC<Props> = ({ setSelectedChat }) => {
     `${
       text
         ? `${
-            isGroup ? (isOwnMessage(username) ? "You" : username) + ": " : ""
+            isGroup ? (isAuthorFn(username) ? "You" : username) + ": " : ""
           }${formatMessageLength(text)}`
         : "No message yet"
     }`;

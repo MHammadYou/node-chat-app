@@ -1,6 +1,6 @@
 import { Typography, Paper } from "@mui/material";
 
-import useUser from "hooks/useUser";
+import useIsAuthor from "hooks/useIsAuthor";
 
 type Props = {
   username: string;
@@ -9,19 +9,18 @@ type Props = {
 };
 
 const Message: React.FC<Props> = ({ username, text, showUsername }) => {
-  const { username: user } = useUser();
-  const isOwnMessage = user === username;
+  const { isAuthor } = useIsAuthor(username);
 
   return (
     <Paper
       sx={{
-        textAlign: isOwnMessage ? "right" : "left",
+        textAlign: isAuthor ? "right" : "left",
         p: 1,
         m: 1,
       }}
       elevation={0}
     >
-      {showUsername && !isOwnMessage && (
+      {showUsername && !isAuthor && (
         <Typography variant="caption" color="grey">
           {username}
         </Typography>
