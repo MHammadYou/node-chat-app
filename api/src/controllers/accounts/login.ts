@@ -24,7 +24,7 @@ export const loginUser = async (
     const isCorrectPassword = await bcrypt.compare(password, user!.password);
     if (isCorrectPassword) {
       const token = signToken(user._id);
-      res.status(200).json({ token, username: user.username });
+      res.status(200).json({ token });
     } else {
       throw new Error("Email or password didn't match");
     }

@@ -16,7 +16,6 @@ const Login: React.FC = () => {
   const [loginUser] = useLoginUserMutation();
   const navigate = useNavigate();
   const { setCookie: setToken } = useCookie("token");
-  const { setCookie: setUsername } = useCookie("username");
 
   const formik = useFormik({
     initialValues: {
@@ -29,7 +28,6 @@ const Login: React.FC = () => {
         const result = await loginUser(values).unwrap();
         useToast("Login Successful", ToastType.SUCCESS);
         setToken(result.token);
-        setUsername(result.username);
         return navigate(ROUTES.default);
       } catch (error) {
         const { status, data } = getSerializedError<ApiError>(error);

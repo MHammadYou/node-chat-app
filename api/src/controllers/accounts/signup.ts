@@ -34,7 +34,7 @@ export const createUser = async (
     await user.save();
 
     const token = signToken(user._id);
-    res.status(201).json({ token, username });
+    res.status(201).json({ token });
   } catch (error) {
     const [message, status] =
       error instanceof Error
