@@ -27,6 +27,9 @@ export const auth = async (
     req.userId = userId;
     next();
   } catch (error) {
-    res.status(401).send(error);
+    res.status(401).json({
+      status: 401,
+      error,
+    });
   }
 };
