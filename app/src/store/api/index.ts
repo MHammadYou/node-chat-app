@@ -7,6 +7,7 @@ import {
 } from "@reduxjs/toolkit/query/react";
 import Cookies from "js-cookie";
 
+import { ApiEndpoints } from "@lib/constants";
 import { API_URL } from "constants/settings.ts";
 
 type BaseError<T> = {
@@ -38,7 +39,11 @@ const baseQueryWithReauth: BaseQueryFn<
   let result = await baseQuery(args, api, extraOptions);
 
   if (result.error && result.error.status === 401) {
-    const refreshResult = await baseQuery("/refresh-token", api, extraOptions);
+    const refreshResult = await baseQuery(
+      ApiEndpoints.refreshToken(),
+      api,
+      extraOptions
+    );
 
     if (refreshResult.data) {
       // TODO

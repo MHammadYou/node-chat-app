@@ -6,6 +6,7 @@ import { UserAuthenticationResponse, User, ApiError } from "@lib/index";
 import Users from "models/users";
 import { isExistingEmail, isExsitingUsername } from "models/users";
 import { signToken } from "utils/signToken";
+import { REFRESH_TOKEN_EXPIRE_IN } from "constants/settings";
 
 export const createUser = async (
   req: Request<{}, {}, User>,
@@ -34,6 +35,15 @@ export const createUser = async (
     await user.save();
 
     const token = signToken(user._id);
+    const refreshToken = signToken(user._id, "30d");
+
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      sameSite: "none",
+      secure: true,
+      maxAge: REFRESH_TOKEN_EXPIRE_IN,
+    });
+
     res.status(201).json({ token });
   } catch (error) {
     const [message, status] =

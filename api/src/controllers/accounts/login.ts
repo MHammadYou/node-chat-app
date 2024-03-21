@@ -9,6 +9,7 @@ import {
 
 import { findUserByEmail } from "models/users";
 import { signToken } from "utils/signToken";
+import { REFRESH_TOKEN_EXPIRE_IN } from "constants/settings";
 
 export const loginUser = async (
   req: Request<{}, {}, UserLoginPayload>,
@@ -24,6 +25,15 @@ export const loginUser = async (
     const isCorrectPassword = await bcrypt.compare(password, user!.password);
     if (isCorrectPassword) {
       const token = signToken(user._id);
+      const refreshToken = signToken(user._id, "30d");
+
+      res.cookie("refreshToken", refreshToken, {
+        httpOnly: true,
+        sameSite: "none",
+        secure: true,
+        maxAge: REFRESH_TOKEN_EXPIRE_IN,
+      });
+
       res.status(200).json({ token });
     } else {
       throw new Error("Email or password didn't match");
