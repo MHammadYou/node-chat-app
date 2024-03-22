@@ -40,7 +40,7 @@ const baseQueryWithReauth: BaseQueryFn<
 
   if (result.error && result.error.status === 401) {
     const refreshResult = await baseQuery(
-      ApiEndpoints.refreshToken(),
+      { url: ApiEndpoints.refreshToken(), method: "POST" },
       api,
       extraOptions
     );

@@ -3,6 +3,7 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 import mongoose from "mongoose";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import "module-alias/register";
 
 import { PORT, DB_URI, ALLOWED_ORIGIN } from "constants/settings";
@@ -17,6 +18,7 @@ const server = createServer(app);
 const io = new Server(server);
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(
   cors({
     origin: ALLOWED_ORIGIN,

@@ -3,7 +3,9 @@ import { verify, JwtPayload } from "jsonwebtoken";
 
 import { SECRET_KEY } from "constants/settings";
 
-export const verifyToken = (token?: string): Promise<Schema.Types.ObjectId> => {
+export const verifyToken = (
+  token?: string
+): Promise<Schema.Types.ObjectId | string> => {
   return new Promise((resolve, reject) => {
     try {
       if (!token) throw new Error("Authentication token missing");
